@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<script src="{% static 'static/jquery/jquery-2.1.1.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'static/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'static/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'static/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'static/css/doc.min.css' %}">
+	<style>
+#footer {
+    padding: 15px 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+#topcontrol {
+  color: #fff;
+  z-index: 99;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background: #222;
+  position: relative;
+  right: 14px !important;
+  bottom: 11px !important;
+  border-radius: 3px !important;
+}
+
+#topcontrol:after {
+  /*top: -2px;*/
+  left: 8.5px;
+  content: "\f106";
+  position: absolute;
+  text-align: center;
+  font-family: FontAwesome;
+}
+
+#topcontrol:hover {
+    color: #fff;
+    background: #18ba9b;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+	</style>
+  </head>
+  <body>
+ <div class="navbar-wrapper">
+      <div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			  <div class="container">
+				<div class="navbar-header">
+				  <a class="navbar-brand" href="/login/" style="font-size:32px;">用户权限系统</a>
+				</div>
+            <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+              <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>{{user_name}}<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="member.html"><i class="glyphicon glyphicon-scale"></i> 会员中心</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/login/"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+			  </div>
+			</nav>
+
+      </div>
+    </div>
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-sm-3 col-md-3 column">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail" style="    border-radius: 0px;">
+                                <img src="{% static '/static/img/services-box1.jpg'%}" class="img-thumbnail" alt="">
+                                <div class="caption" style="text-align:center;">
+                                    <h3>
+                                        {{user_name}}
+                                    </h3>
+                                    <span class="label label-danger" style="cursor:pointer;" onclick="window.location.href='accttype.html'">普通用户</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="list-group">
+                        {% for function in all_functions %}
+                        <div class="list-group-item" style="cursor:pointer;" onclick="checkAccess({{ user.user_id }}, {{ function.f_id }})">
+                            {{ function.f_name }}<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                 <div class="col-sm-9 col-md-9 column">
+                    <blockquote>
+                        <b>个人信息</b>
+                    </blockquote>
+                    <div>
+                        <p>用户名: {{ user.user_name }}</p>
+                        <p>邮箱: {{ user.email }}</p>
+                        <p>身份: {{ user.identity }}</p>
+                    </div>
+                    <blockquote>
+                        <b>角色与许可</b>
+                    </blockquote>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>角色名称</th>
+                                <th>功能</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for role in roles %}
+                            <tr>
+                                <td>{{ role.role_name }}</td>
+                                <td>
+                                    {% for func in role.functions.all %}
+                                    {{ func.f_name }}<br>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+        <div class="container" style="margin-top:20px;">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div id="footer">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    <script src="{% static '/static/jquery/jquery-2.1.1.min.js' %}"></script>
+    <script src="{% static '/static/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static '/static/script/docs.min.js' %}"></script>
+    <script src="{% static  '/static/script/back-to-top.js'%}"></script>
+    <script src="{% static '/static/script/echarts.js'%}"></script>
+    <script>
+    function checkAccess(userId, functionId) {
+        $.ajax({
+            url: `/${userId}/permission/`,  // 确保这里的 URL 是正确的
+            type: 'GET',
+            data: { 'function_id': functionId },
+            success: function(response) {
+                alert(response.message);  // 服务器应返回是否有权限的消息
+            },
+            error: function() {
+                alert('权限检查失败，请联系管理员。');
+            }
+        });
+    }
+
+
+</script>
+
+  </body>
+</html>
