@@ -1,0 +1,95 @@
+.unreadMsg__container {
+  z-index: 4;
+}
+.unreadMsg__container.unreadMsg__top {
+  position: relative;
+  height: 36px;
+  background: rgba(96,170,255,1);
+  text-align: center;
+  line-height: 36px;
+}
+.unreadMsg__container.unreadMsg__top .unreadMsg__right-text {
+  color: #fff;
+  display: inline-block;
+  height: 100%;
+  padding: 0 10px;
+  max-width: 1180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.unreadMsg__container .unreadMsg__right-text[data-href] {
+  cursor: pointer;
+}
+.unreadMsg__container.unreadMsg__top .unreadMsg__right-text a{
+  text-decoration: underline;
+  color: #fff !important;
+}
+.unreadMsg__container.unreadMsg__top .closeBtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  height: 24px;
+  width: 24px;
+  background: url(../img/top.close.png) no-repeat center;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+.unreadMsg__container.unreadMsg__right {
+  position: fixed;
+  width: 360px;
+  height: 100px;
+  top: 70px;
+  right: 15px;
+  padding: 20px;
+  background: #fff;
+  box-shadow:0px 0px 10px 2px rgba(0,0,0,0.08);
+  border-radius:2px;
+  z-index: 100;
+}
+.unreadMsg__container.unreadMsg__right .unreadMsg__right-text {
+  display: inline-block;
+  height: 60px;
+  background: url(../img/right.bg.png) no-repeat left;
+  padding-left: 72px;
+  background-size: 60px 60px;
+  width: 100%;
+  line-height: 20px;
+}
+.unreadMsg__container.unreadMsg__right .unreadMsg__right-text a {
+  color: #666 !important;
+  text-decoration: underline;
+}
+.unreadMsg__container.unreadMsg__right .unreadMsg__right-text span {
+  display: inline-block;
+  margin: 10px 0;
+}
+.unreadMsg__container.unreadMsg__right .unreadMsg__right-text.after span{
+  overflow: hidden;
+  position: relative;
+  line-height: normal;
+  display: inline-block;
+  margin: 10px 0;
+  height: 40px;
+}
+
+.unreadMsg__container.unreadMsg__right .unreadMsg__right-text.after span::after {
+  content:"...";
+  font-weight:bold;
+  position:absolute;
+  bottom: 0;
+  right: 0;
+  padding:0 16px 1px 10px;
+  background: #fff;
+}
+
+.unreadMsg__container.unreadMsg__right .closeBtn {
+  position: absolute;
+  top: 7px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  background: url(../img/right.close.png) no-repeat center;
+  background-size: 10px 10px;
+  cursor: pointer;
+}

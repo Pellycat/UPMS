@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>展示表格</title>
+</head>
+<body>
+   <div class="container">
+        <h2>权重数据表格</h2>
+
+        <h3>Weights for Minimum Variance</h3>
+        <div>{{ weights_min_var_html|safe }}</div>
+
+        <h3>Weights for Maximum Utility</h3>
+        <div>{{ weights_util_max_html|safe }}</div>
+
+        <h3>Equal Weights</h3>
+        <div>{{ weights_equal_html|safe }}</div>
+    </div>
+</body>
+</html>
