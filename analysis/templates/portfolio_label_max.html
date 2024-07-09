@@ -1,0 +1,27 @@
+{% extends 'portfolio_show.html' %}
+
+{% block content %}
+   <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+        <h2>最大化效用投资组合持仓权重</h2>
+        <h3>Weights for Maximum Utility</h3>
+        <div style="overflow-x: auto;">
+            {{ weights_util_max_html|safe }}
+        </div>
+    </div>
+
+    <style>
+        .container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .container th, .container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .container th {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock %}

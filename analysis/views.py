@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 
 
@@ -5,12 +7,14 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from .models import Lasso_Predicted_Return,EN_Predicted_Return,Rd_Predicted_Return,Real_Return
 
 
 weights_min_var_df=pd.DataFrame()
 weights_util_max_df=pd.DataFrame()
 weights_equal_df=pd.DataFrame()
+monthly_excess_returns_df=pd.DataFrame()
 start=''
 end=''
 
@@ -303,8 +307,6 @@ def data_process(data, capital, num, start, end):
     })
     monthly_excess_returns_df.to_csv('monthly_excess_returns_portfolio.csv', index=False)
 
-    print("Monthly excess returns saved to monthly_excess_returns_portfolio.csv")
-
     # 找到最长的权重数组长度
     max_length = max(len(weights) for weights in weights_min_var.values())
 
@@ -319,11 +321,11 @@ def data_process(data, capital, num, start, end):
         {date: np.pad(weights, (0, max_length - len(weights)), 'constant', constant_values=np.nan)
          for date, weights in weights_equal.items()}).T
 
-    return weights_min_var_df, weights_util_max_df, weights_equal_df
+    return weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df
 
 
 def choice_gupiao(request):
-    global weights_min_var_df, weights_util_max_df, weights_equal_df, start, end
+    global weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, start, end
     if request.method == 'POST':
         name = request.POST.get('name')
         model = request.POST.get('algorithmId')
@@ -336,18 +338,18 @@ def choice_gupiao(request):
         if model == "Lasso":
             result = Lasso_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_df, weights_util_max_df, weights_equal_df = data_process(result_df, capital, num, start, end)
-            return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
+            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
+            return redirect("/portfolio/calculate_and_return_metrics_html")
 
         elif model == "EN":
             result = EN_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_df, weights_util_max_df, weights_equal_df = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
             return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
         elif model == "Ridge":
             result = Rd_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_df, weights_util_max_df, weights_equal_df = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
             return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
         else:
             return JsonResponse({'message': '请选择合适的模型'})
@@ -355,23 +357,216 @@ def choice_gupiao(request):
     return render(request, 'inputadd.html')
 
 
-def label(request):
-    global weights_min_var_df, weights_util_max_df, weights_equal_df, start, end
+def weights_min_var_label(request):
+    global weights_min_var_df, start, end
     # 检查全局变量是否为 DataFrame 实例
     if not isinstance(weights_min_var_df, pd.DataFrame):
         weights_min_var_df = pd.DataFrame()
+    weights_min_var_html = weights_min_var_df.to_html(classes='table table-striped')
+
+    return render(request, 'portfolio_label_min.html', {
+        'weights_min_var_html': weights_min_var_html,
+        'n1': start, 'n2': end
+    })
+
+def weights_util_max_label(request):
+    global weights_util_max_df, start, end
+    # 检查全局变量是否为 DataFrame 实例
     if not isinstance(weights_util_max_df, pd.DataFrame):
         weights_util_max_df = pd.DataFrame()
+    weights_util_max_html = weights_util_max_df.to_html(classes='table table-striped')
+
+    return render(request, 'portfolio_label_max.html', {
+        'weights_util_max_html': weights_util_max_html,
+        'n1': start, 'n2': end
+    })
+
+def weights_equal_label(request):
+    global weights_equal_df, start, end
+    # 检查全局变量是否为 DataFrame 实例
     if not isinstance(weights_equal_df, pd.DataFrame):
         weights_equal_df = pd.DataFrame()
-
-    weights_min_var_html = weights_min_var_df.to_html(classes='table table-striped')
-    weights_util_max_html = weights_util_max_df.to_html(classes='table table-striped')
     weights_equal_html = weights_equal_df.to_html(classes='table table-striped')
 
-    return render(request, 'portfolio_label.html', {
-        'weights_min_var_html': weights_min_var_html,
-        'weights_util_max_html': weights_util_max_html,
+    return render(request, 'portfolio_label_equal.html', {
         'weights_equal_html': weights_equal_html,
         'n1': start, 'n2': end
     })
+
+def cumulative_excess_returns(request):
+    global monthly_excess_returns_df, start, end
+    cumulative_excess_returns_df = monthly_excess_returns_df.copy()
+    # 调试信息，打印 DataFrame 的列和前几行数据
+    print("Columns in cumulative_excess_returns_df:", cumulative_excess_returns_df.columns)
+    print("Head of cumulative_excess_returns_df:", cumulative_excess_returns_df.head())
+
+    # 计算累计超额收益率
+    if 'Min_Var_Excess_Returns' in cumulative_excess_returns_df.columns and \
+       'Util_Max_Excess_Returns' in cumulative_excess_returns_df.columns and \
+       'Equal_Excess_Returns' in cumulative_excess_returns_df.columns:
+
+        cumulative_excess_returns_df['Cumulative_Min_Var_Excess_Returns'] = (1 + cumulative_excess_returns_df['Min_Var_Excess_Returns']).cumprod() - 1
+        cumulative_excess_returns_df['Cumulative_Util_Max_Excess_Returns'] = (1 + cumulative_excess_returns_df['Util_Max_Excess_Returns']).cumprod() - 1
+        cumulative_excess_returns_df['Cumulative_Equal_Excess_Returns'] = (1 + cumulative_excess_returns_df['Equal_Excess_Returns']).cumprod() - 1
+
+        # 绘制累计超额收益率折线图
+        plt.figure(figsize=(14, 7))
+        plt.plot(cumulative_excess_returns_df['Date'], cumulative_excess_returns_df['Cumulative_Min_Var_Excess_Returns'], label='Min Var Excess Return')
+        plt.plot(cumulative_excess_returns_df['Date'], cumulative_excess_returns_df['Cumulative_Util_Max_Excess_Returns'], label='Util Max Excess Return')
+        plt.plot(cumulative_excess_returns_df['Date'], cumulative_excess_returns_df['Cumulative_Equal_Excess_Returns'], label='Equal Excess Return')
+        plt.xlabel('Date')
+        plt.ylabel('Cumulative Excess Returns')
+        plt.title('Cumulative Excess Returns Over Time')
+        plt.legend()
+        plt.grid(True)
+        plt.tight_layout()
+
+        # 确保目录存在
+        static_dir = os.path.join(os.path.dirname(__file__), 'static', 'plot')
+        if not os.path.exists(static_dir):
+            os.makedirs(static_dir)
+
+        # 保存图像文件
+        image_path = os.path.join(static_dir, 'cumulative_excess_returns.png')
+        plt.savefig(image_path)
+        plt.close()
+
+        # 获取相对路径用于模板显示
+        image_url = 'plot/cumulative_excess_returns.png'
+
+        return render(request, 'portfolio_cumulative_excess_returns.html', {'image_url': image_url, 'n1': start, 'n2': end})
+    else:
+        return JsonResponse({'error': 'Missing required columns in DataFrame'})
+
+
+def monthly_excess_returns(request):
+    global monthly_excess_returns_df, start, end
+    portfolio_monthly_excess_returns_df = monthly_excess_returns_df.copy()
+    # 调试信息，打印 DataFrame 的列和前几行数据
+    print("Columns in portfolio_monthly_excess_returns_df:", portfolio_monthly_excess_returns_df.columns)
+    print("Head of portfolio_monthly_excess_returns_df:", portfolio_monthly_excess_returns_df.head())
+
+    if 'Date' in portfolio_monthly_excess_returns_df.columns:
+        # 将Date列转换为datetime格式
+        portfolio_monthly_excess_returns_df['Date'] = pd.to_datetime(portfolio_monthly_excess_returns_df['Date'])
+
+        # 设置Date列为索引
+        portfolio_monthly_excess_returns_df.set_index('Date', inplace=True)
+
+    # 绘制折线图
+    plt.figure(figsize=(14, 7))
+
+    for column in portfolio_monthly_excess_returns_df.columns:
+        plt.plot(portfolio_monthly_excess_returns_df.index, portfolio_monthly_excess_returns_df[column], label=column)
+
+    plt.xlabel('Date')
+    plt.ylabel('Excess Returns')
+    plt.title('Monthly Excess Returns of Portfolios')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+
+    # 确保目录存在
+    static_dir = os.path.join(os.path.dirname(__file__), 'static', 'plot')
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+
+    # 保存图像文件
+    image_path = os.path.join(static_dir, 'monthly_excess_returns_plot.png')
+    plt.savefig(image_path)
+    plt.close()
+
+    # 获取相对路径用于模板显示
+    image_url = 'plot/monthly_excess_returns_plot.png'
+
+    return render(request, 'portfolio_monthly_excess_returns.html', {'image_url': image_url, 'n1': start, 'n2': end})
+
+
+def calculate_metrics(returns, benchmark, equal_excess_returns):
+    cumulative_return = (1 + returns).prod() - 1
+    annualized_return = (1 + cumulative_return) ** (12 / len(returns)) - 1
+    final_value = 100000 * (1 + cumulative_return)
+    max_drawdown = ((returns + 1).cumprod() / (returns + 1).cumprod().cummax()).min() - 1
+    sharpe_ratio = returns.mean() / returns.std() * np.sqrt(12)
+    beta = returns.cov(benchmark) / benchmark.var()
+    alpha = returns.mean() - beta * benchmark.mean()
+
+    yearly_win_rate = (returns > benchmark).rolling(12).sum().mean() / 12
+    rolling_3y_win_rate = (returns > equal_excess_returns).rolling(36).sum().mean() / 36
+
+    return {
+        '平均超额收益': returns.mean(),
+        '投人100000元的期末值': final_value,
+        '一年内策略超市场次数占比': yearly_win_rate,
+        '滚动3年策略超Equal_Excess_Returns次数占比': rolling_3y_win_rate,
+        '最大盈利': returns.max(),
+        '最大亏损': returns.min(),
+        '夏普比率': sharpe_ratio,
+        '收益标准差': returns.std(),
+        'Beta(全样本)': beta,
+        'Alpha(全样本)': alpha,
+    }
+
+def create_metrics_html(metrics_df):
+    # 假设 metrics_df 是你的 DataFrame
+    # 分割 DataFrame 为两部分
+    first_half = metrics_df.iloc[:, :5]
+    second_half = metrics_df.iloc[:, 5:]
+
+    # 转换为HTML
+    first_half_html = first_half.to_html(classes='table table-striped', index=False)
+    second_half_html = second_half.to_html(classes='table table-striped', index=False)
+
+    # 合并两部分的HTML代码
+    combined_html = f"""
+    <table class='table table-striped'>
+        <tbody>
+            <tr><td>{first_half_html}</td></tr>
+            <tr><td>{second_half_html}</td></tr>
+        </tbody>
+    </table>
+    """
+    return combined_html
+
+def calculate_and_return_metrics_html(request):
+    # 假设这里获取了market数据，这部分需根据实际情况调整
+    global start, end, monthly_excess_returns_df
+    portfolio = monthly_excess_returns_df.copy()
+    market = pd.read_csv('market.csv')  # 替换成实际的数据获取方式
+    market = pd.merge(left=market, right=portfolio, how="inner", on="Date")
+
+    # 获取市场指数和Equal_Excess_Returns
+    index_excess_return = market['Index_ExRet']
+    equal_excess_returns = market['Equal_Excess_Returns']
+
+    # 计算Min_Var_Excess_Returns的指标
+    min_var_returns = market['Min_Var_Excess_Returns']
+    min_var_metrics = calculate_metrics(min_var_returns, index_excess_return, equal_excess_returns)
+
+    # 计算Util_Max_Excess_Returns的指标
+    util_max_returns = market['Util_Max_Excess_Returns']
+    util_max_metrics = calculate_metrics(util_max_returns, index_excess_return, equal_excess_returns)
+
+    # 初始化存储指标的字典
+    metrics = {
+        '策略': ['Min_Var_Excess_Returns', 'Util_Max_Excess_Returns'],
+        '平均超额收益': [min_var_metrics['平均超额收益'], util_max_metrics['平均超额收益']],
+        '投人100000元的期末值': [min_var_metrics['投人100000元的期末值'], util_max_metrics['投人100000元的期末值']],
+        '一年内策略超市场次数占比': [min_var_metrics['一年内策略超市场次数占比'], util_max_metrics['一年内策略超市场次数占比']],
+        '滚动3年策略超Equal_Excess_Returns次数占比': [min_var_metrics['滚动3年策略超Equal_Excess_Returns次数占比'], util_max_metrics['滚动3年策略超Equal_Excess_Returns次数占比']],
+        '最大盈利': [min_var_metrics['最大盈利'], util_max_metrics['最大盈利']],
+        '最大亏损': [min_var_metrics['最大亏损'], util_max_metrics['最大亏损']],
+        '夏普比率': [min_var_metrics['夏普比率'], util_max_metrics['夏普比率']],
+        '收益标准差': [min_var_metrics['收益标准差'], util_max_metrics['收益标准差']],
+        'Beta(全样本)': [min_var_metrics['Beta(全样本)'], util_max_metrics['Beta(全样本)']],
+        'Alpha(全样本)': [min_var_metrics['Alpha(全样本)'], util_max_metrics['Alpha(全样本)']],
+    }
+
+    # 将结果转换为DataFrame
+    metrics_df = pd.DataFrame(metrics)
+
+    # 将DataFrame转换为HTML表格
+    metrics_html = create_metrics_html(metrics_df)
+
+    # 将HTML表格返回给前端页面
+    return render(request, 'portfolio_metrics_table.html', {'metrics_html': metrics_html, 'n1': start, 'n2': end})
