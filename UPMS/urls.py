@@ -19,6 +19,7 @@ from django.urls import path
 #hello
 
 from app import views
+from analysis import views as analysis_views
 urlpatterns = [
     #登陆验证
     path('login/', views.login, name='login'),
@@ -41,7 +42,9 @@ urlpatterns = [
 
     path('user/<int:nid>/assign/', views.assignrole, name='assign_role'),
     path('role/<int:nid>/assignfunction/', views.assignfunction, name='assign_function'),
-    path('<int:nid>/permission/', views.checkpermission, name='check_permission')
+    path('<int:nid>/permission/', views.checkpermission, name='check_permission'),
+    path('analysis/',analysis_views.choice_gupiao),
+    path('portfolio/', analysis_views.data_process)
 
 
 ]

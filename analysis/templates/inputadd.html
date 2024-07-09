@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交易设置</title>
+<style>
+	@media (max-width: 500px){
+		.mainpage-container .container{padding:10px;}
+		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{padding:8px 0px;}
+		.algo-toolbar .btn-group{margin-left: 0 !important;}
+		.align-left{text-align: center;}
+	}
+	.mobile .yjb{
+		float: left;
+	}
+	.mobile .mo-none{
+		display: none !important;
+	}
+	.mobile .algo-toolbar{
+		width:100%;
+	}
+	.mobile .mainpage-container.algo-list .container{
+		min-height:calc(100vh - 308px);
+	}
+	@media (max-width: 1180px){
+		.mainpage-container.algo-list .container{
+			width:100%;
+		}
+		footer.bottom-50{
+			bottom:-110px;
+		}
+	}
+	.tips-wrap{
+		margin: 10px;
+		overflow: hidden;
+	}
+	.tips{
+		float: right;
+		color:#fb4044;
+		padding: 0;
+	}
+	.nowrap{
+		max-width: 210px;
+	}
+	footer.bottom-50{
+		bottom: -121px;
+	}
+	.table>tbody>tr>td, .table>thead>tr>td{
+		padding:8px 0;
+	}
+	.table>tbody>tr>td.un-selectbox, .table>tbody>tr>td.selectbox{
+		padding:8px;
+	}
+
+	.gather-icon {
+		float: left;
+		margin-left: 6px;
+		width: 42px;
+		height: 24px;
+		text-align: center;
+		line-height: 21px;
+		color: #FFF;
+		font-size: 12px;
+		padding-right: 2px;
+		background-image: url('https://cdn.joinquant.com/std/algorithm/img/gather.png');
+	}
+	.automaticRealDisk {
+		color:#fb8341;
+		float: right;
+		line-height: 48px;
+	}
+	.automaticRealDisk:hover {
+		color:#fb8341;
+	}
+</style>
+</head>
+<body>
+
+<form action="/analysis/" method="POST" style="padding: 36px 48px 0;">
+    {% csrf_token %}
+    <div class="new-item clear">
+        <span class="item-title">交易名称</span>
+        <input type="text" class="item-input" name="name" datatype="*1-100" placeholder="这是一个简单的策略" errormsg="请填写交易名称，模拟交易名称应不大于100位">
+        <span class="error_tips hidden"></span>
+    </div>
+    <div class="new-item clear">
+        <span class="item-title">选择策略</span>
+        <select name="algorithmId" class="item-select hidden"  datatype="*" id="select-algorithm"  errormsg="请选择策略">
+            <option value="Lasso">Lasso</option>
+            <option value="Ridge">Ridge</option>
+            <option value="EN">EN</option>
+        </select>
+        <span class="error_tips hidden"></span>
+    </div>
+    <div class="new-item clear">
+        <span class="item-title">初始资金</span>
+        <input type="number" class="item-input basecapital" name="capital" value="10000" step="1000" min="1000" placeholder="请填写初始资金"  errormsg="请填写大于等于1000的初始资金">
+        <span class="error_tips hidden"></span>
+    </div>
+    <div class="new-item clear">
+        <span class="item-title">股票池数量</span>
+        <input type="number" class="item-input basecapital" name="pool_num" value="5" step="1" min="1" placeholder="请填写股票数量"  errormsg="请填写大于等于1的股票数量">
+        <span class="error_tips hidden"></span>
+    </div>
+    <div class="new-item fleft">
+        <span class="item-title">运行频率</span>
+        <select name="frequency" class="item-select" id="select-frequency"  datatype="*" errormsg="请选择运行频率">
+            <option value="month">每月</option>
+        </select>
+        <span class="error_tips hidden"></span>
+    </div>
+    <div class="new-item fright">
+        <span class="item-title">开始日期</span>
+        <input type="text" name="startTime" class="item-input" id="startTime"  placeholder="YYYY-MM-DD">
+        <span class="item-title">结束日期</span>
+        <input type="text" name="endTime" class="item-input" id="endTime"  placeholder="YYYY-MM-DD">
+        <span class="error_tips hidden"></span>
+    </div>
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">确定</button>
+      </div>
+</form>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // 添加你的JavaScript脚本这里
+    // 使用JavaScript来处理用户输入的日期字符串
+    const startTimeInput = document.getElementById('startTime');
+    const endTimeInput = document.getElementById('endTime');
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async function(event) {
+    event.preventDefault(); // 阻止默认表单提交行为
+
+    const formData = new FormData(form);
+    const response = await fetch('/analysis/', {
+        method: 'POST',
+        body: formData
+    });
+
+    const result = await response.json();
+    console.log('后端返回的数据：', result);
+});
+    startTimeInput.addEventListener('change', function() {
+        const startTime = startTimeInput.value;
+        console.log('用户输入的开始日期字符串是：', startTime);
+    });
+
+    endTimeInput.addEventListener('change', function() {
+        const endTime = endTimeInput.value;
+        console.log('用户输入的结束日期字符串是：', endTime);
+    });
+
+</script>
+
+</body>
+</html>
