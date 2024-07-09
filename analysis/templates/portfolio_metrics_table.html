@@ -1,0 +1,26 @@
+{% extends 'portfolio_show.html' %}
+{% block content %}
+   <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+        <h2>收益概述表格</h2>
+        <h3>Returns Summary</h3>
+        <div>{{ metrics_html|safe }}</div>
+    </div>
+    <style>
+        .container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .container th, .container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .container th {
+            background-color: #f2f2f2;
+        }
+        .table table {
+            margin: auto;
+        }
+    </style>
+{% endblock %}

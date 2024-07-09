@@ -1,0 +1,12 @@
+{% extends 'portfolio_show.html' %}
+{% load static %}
+{% block content %}
+   <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+    <h2>组合超额收益率图</h2>
+    {% if image_url %}
+        <img src="{% static image_url %}" alt="Monthly Excess Returns of Portfolios" style="max-width: 100%; height: auto;">
+    {% else %}
+        <p>图表数据不可用。</p>
+    {% endif %}
+    </div>
+{% endblock %}
