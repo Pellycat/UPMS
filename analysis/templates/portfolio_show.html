@@ -1,34 +1,28 @@
-
+{% load static %}
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>策略展示</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="vipType" content="">
-        <meta name="tick-access" content="0" />
-        <link type='text/css'  href="https://cdn.joinquant.com/common/css/lib.min.css?v=1719998041744" rel='stylesheet'></link>
-        <link type='text/css'  href="https://cdn.joinquant.com/common/css/common.min.css?v=1719998041744" rel='stylesheet'></link>
-        <link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/static/common/css/jq-common.min.css?v=1719998041744">
-        <link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/static/default/css/newUserTip.css?v=1719998041744">
-        <link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/dist/static_v2/default/backtotop/detail/index/index.component.bundle.css?v=1719998041744">
-        <link rel="icon" href="https://cdn.joinquant.com/common/img/favicon-16-16.png?v=2" type="image/x-icon">
-
-        <link rel="stylesheet" type='text/css' href="https://cdn.joinquant.com/dist/static_v2/global/user/login/index/index.component.bundle.css?v=1719998041744" />
-        <link rel="stylesheet" type='text/css' href="https://cdn.joinquant.com/user/css/unreadMsg.css?v=1719998041744" />
-        <link type='text/css'  href="https://cdn.joinquant.com/themes/jq/static/default/css/iconfont.css" rel='stylesheet'/>
-
-        
+<head>
+<meta charset="utf-8">
+<title>策略展示</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="vipType" content="">
+<meta name="tick-access" content="0" />
+<link type='text/css'  href="https://cdn.joinquant.com/common/css/lib.min.css?v=1719998041744" rel='stylesheet'></link>
+<link type='text/css'  href="https://cdn.joinquant.com/common/css/common.min.css?v=1719998041744" rel='stylesheet'></link>
+<link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/static/common/css/jq-common.min.css?v=1719998041744">
+<link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/static/default/css/newUserTip.css?v=1719998041744">
+<link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/dist/static_v2/default/backtotop/detail/index/index.component.bundle.css?v=1719998041744">
+<link rel="icon" href="https://cdn.joinquant.com/common/img/favicon-16-16.png?v=2" type="image/x-icon">
+<link rel="stylesheet" type='text/css' href="https://cdn.joinquant.com/dist/static_v2/global/user/login/index/index.component.bundle.css?v=1719998041744" />
+<link rel="stylesheet" type='text/css' href="https://cdn.joinquant.com/user/css/unreadMsg.css?v=1719998041744" />
+<link type='text/css'  href="https://cdn.joinquant.com/themes/jq/static/default/css/iconfont.css" rel='stylesheet'/>
 <link href="https://cdn.joinquant.com/std/third/comboSelect/combo.select.css" rel="stylesheet" />
 <link href="https://cdn.joinquant.com/std/third/loading/loading.css" rel="stylesheet" />
-
-
 <link href="https://cdn.joinquant.com/third/jquery-ui/jquery-ui-jq.min.css?v=1719998041744" rel="stylesheet" />
 <link href="https://cdn.joinquant.com/common/css/newBootstrapDialog.min.css?v=1719998041744" rel="stylesheet" />
 <link href="https://cdn.joinquant.com/std/algorithm/css/algorithm.min.css?v=1719998041744" rel="stylesheet" />
 <link href="https://cdn.joinquant.com/std/algorithm/css/backtest.min.css?v=1719998041744" rel="stylesheet" />
 <link href="https://cdn.joinquant.com/std/algorithm/css/newTrade.min.css?v=1719998041744" rel="stylesheet" />
-
 <link href="https://cdn.joinquant.com/themes/jq/static/algorithm/css/algorithm.min.css?v=1719998041744" rel="stylesheet" />
 <link href="https://cdn.joinquant.com/themes/jq/static/algorithm/css/getNewAlgorithmDialog.min.css?v=1719998041744" rel="stylesheet" />
 
@@ -84,1061 +78,301 @@
         padding-bottom:0px;
     }
 </style>
+<style>
+    span.new{
+    background: rgba(0,0,0,0);
+}
+.side-bar .top .name.user-alias img{
+    width:16px;
+    height:16px;
+    float: none;
+    margin-right:0;
+}
+.kk_footer .wp20.last img{
+    position: relative;
+    top:-2px;
+}
+.kk_footer .wp20.last .item>a{
+    position: relative;
+    left:-5px;
+}
+</style>
+<script type='text/javascript'>
+    var _vds = _vds || [];
+    window._vds = _vds;
+    (function(){
+                        _vds.push(['setAccountId', '949f6a566feb9b09']);
+                                    _vds.push(['trackBot', false]);
+     (function() {
+       // if (window.location.href.indexOf('www.joinquant.com') > -1) {
+         var vds = document.createElement('script');
+         vds.type='text/javascript';
+         vds.async = true;
+         vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'assets.giocdn.com/vds.js';
+         var s = document.getElementsByTagName('script')[0];
+         s.parentNode.insertBefore(vds, s);
+       // }
+     })();
+    })();
+    var g_domain = 'https://www.joinquant.com';
+    var g_filedomain = 'https://file.joinquant.com';
 
-                                                                        <style>
-        span.new{
-        background: rgba(0,0,0,0);
-    }
-    .side-bar .top .name.user-alias img{
-        width:16px;
-        height:16px;
-        float: none;
-        margin-right:0;
-    }
-    .kk_footer .wp20.last img{
-        position: relative;
-        top:-2px;
-    }
-    .kk_footer .wp20.last .item>a{
-        position: relative;
-        left:-5px;
-    }
-        </style>
-    <script type='text/javascript'>
-        var _vds = _vds || [];
-        window._vds = _vds;
-        (function(){
-                            _vds.push(['setAccountId', '949f6a566feb9b09']);
-                                        _vds.push(['trackBot', false]);
-         (function() {
-           // if (window.location.href.indexOf('www.joinquant.com') > -1) {
-             var vds = document.createElement('script');
-             vds.type='text/javascript';
-             vds.async = true;
-             vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'assets.giocdn.com/vds.js';
-             var s = document.getElementsByTagName('script')[0];
-             s.parentNode.insertBefore(vds, s);
-           // }
-         })();
-        })();
-        var g_domain = 'https://www.joinquant.com';
-        var g_filedomain = 'https://file.joinquant.com';
+</script>
+</head>
 
-        </script>
-    </head>
-    <body >
-
-                                <div class="kk_main in_wrap">
-                        
-            <header id="kk_nav" class="fixed-top kk_nav navbar narbar-static-top heigh_nav">
-              <div class="kk_nav_container js-jq-header" ></div>
-            </header>
-            
-            <!--/header-->
-
-            <!-- <div class="kk_body  js-jq-body hidden top_50  "> -->
-            <div class="kk_body js-jq-body top_50  ">
-                            <!-- 创建时间是否超出180天 -->
-    <div class="backtest-area content content-area old-style padding_b0" >
-    <input type="hidden" id="isOwner" value="1">
-    <input type="hidden" id="backtest-decryptId" value="35439623">
-    <input type="hidden" id="backtestTpl" data-backtestId="01adc9583c546017b7f27925775532ba">
-    <input type="hidden" id="minLiveDate" name="minLiveDate"  value="2024-07-09">
-    <input type="hidden" id="accessControl" name="accessControl"  value="0">
-    <input type="hidden" id="local_algorithmId" value="5146375">
-    <input type="hidden" id="algorithmId" name="backtest[algorithmId]"  value="b285bbe7632a2740ba3752ff2fffb6d2">
-    <input type="hidden" id="liveTimeout" name="liveTimeout"  value="1">
-    <input type="hidden" id="source-backtest" name="source-backtest" value="cfcd208495d565ef66e7dff9f98764da" >
-
-
-    <!-- 判断当前模拟盘选的python版本 -->
-        <input type="hidden" id="tradePyVersion" value="2" >
-
+<body >
+<div class="kk_main in_wrap">
+    <header id="kk_nav" class="fixed-top kk_nav navbar narbar-static-top heigh_nav">
+        <div class="kk_nav_container js-jq-header" ></div>
+    </header>
+<!--/header-->
+<!-- <div class="kk_body  js-jq-body hidden top_50  "> -->
+    <div class="kk_body js-jq-body top_50  ">
+        <div class="backtest-area content content-area old-style padding_b0" >
+            <input type="hidden" id="isOwner" value="1">
+            <input type="hidden" id="backtest-decryptId" value="35439623">
+            <input type="hidden" id="backtestTpl" data-backtestId="01adc9583c546017b7f27925775532ba">
+            <input type="hidden" id="minLiveDate" name="minLiveDate"  value="2024-07-09">
+            <input type="hidden" id="accessControl" name="accessControl"  value="0">
+            <input type="hidden" id="local_algorithmId" value="5146375">
+            <input type="hidden" id="algorithmId" name="backtest[algorithmId]"  value="b285bbe7632a2740ba3752ff2fffb6d2">
+            <input type="hidden" id="liveTimeout" name="liveTimeout"  value="1">
+            <input type="hidden" id="source-backtest" name="source-backtest" value="cfcd208495d565ef66e7dff9f98764da" >
+            <!-- 判断当前模拟盘选的python版本 -->
+            <input type="hidden" id="tradePyVersion" value="2" >
     <!-- TODO: 将form换为div，防止被提交 -->
-    <div name="AlgorithmModel">
-        <input type="hidden" id="backtestId" name="backtest[backtestId]"  value="94a941aa4011c86f9e1279595b9a7c73" backtestId_="a9f90cc1607dd6f980db270888920420">
+            <div name="AlgorithmModel">
+                <input type="hidden" id="backtestId" name="backtest[backtestId]"  value="94a941aa4011c86f9e1279595b9a7c73" backtestId_="a9f90cc1607dd6f980db270888920420">
 
-        <textarea  id="code" name="backtest[code]" class="hidden" _isLoad="0" _backtestId="33050854092b64f6338bbdb00d156d28"></textarea>
-        <div id="subnav" class="subnav">
-            <a href="/algorithm/index/edit?algorithmId=eb04bd2914711c901a3386f700541365" class="algo-back" title="返回策略页">
-                <i class="icon icon-chevron-left no-decoration"></i>
-            </a>
-            <div style="display:inline-block;margin-top: 13px" class="fa-title-box">
-                <span id="title-box" >小市值策略</span>
-                <span title="点击编辑回测名称" class="algo-change icon_edit"  id="name-a9f90cc1607dd6f980db270888920420" _backtestId="a9f90cc1607dd6f980db270888920420" ></span>            </div>
-            <div class="state-triangle-detail"></div>
-            <div class="state-triangle-detail border"></div>
-
-            <div class="fright algo-btn-groups">
-                <span class="run-time-info-icon"></span>
-                <div class="run-time-popover-html"></div>
-                                                                <a class=" no-decoration btn-item" href="/algorithm/index/edit?algorithmId=fbbdfd571f633146d2669d0e5fcd4acc" id="algo-button">
-                    编辑策略
-                </a>
-                <a class="no-decoration btn-item active" href="javascript:viod(0)" id="algo-backtest">
-                    回测详情
-                </a>
-                <span class="line_bg"></span>
-                                <a class="no-decoration btn-item" href="/algorithm/backtest/buildList?algorithmId=5cbae3e26d9901b9f451dfff06ef56db" id="edit-button">
-                    编译运行列表
-                </a>
-                                <a class="no-decoration btn-item" href="/algorithm/backtest/list?algorithmId=1832e1c957478443a4ae8baafb003d63" id="backtest-button">
-                    回测列表
-                </a>
-            </div>
-        </div>
-
-        <div id="main-pane" class="main-pane">
-            <div id="backtest-settings-outer-container" class="clearfix">
-                <div class="left-container pull-left" >
-
-                    <div class="inline-block setting">
-                        <span>日期：</span>
-                        <div id="backtest-settings-summary-payload" class="backtest-settings-summary-payload white-on-tour inline-block">
-                            <span class="date backtest_start_date_display" id="startDate">{{ n1 }}</span>
-                            <span> 到 </span>
-                            <span class="date backtest_end_date_display" id="endDate">{{ n2 }}</span>，
-                            <span class="capital backtest_capitalbase_display" id="baseCapital">￥100000</span>，
-                            <span id="backtestCapital" _cash="100000" class="hidden"></span>
-                            <span class="capital backtest_datafrequency_display" id="frequency" value="day">每月</span>
-                        </div>
+                <textarea  id="code" name="backtest[code]" class="hidden" _isLoad="0" _backtestId="33050854092b64f6338bbdb00d156d28"></textarea>
+                <div id="subnav" class="subnav">
+                    <a href="/algorithm/index/edit?algorithmId=eb04bd2914711c901a3386f700541365" class="algo-back" title="返回策略页">
+                        <i class="icon icon-chevron-left no-decoration"></i>
+                    </a>
+                    <div style="display:inline-block;margin-top: 13px" class="fa-title-box">
+                        <span id="title-box" >小市值策略</span>
+                    <div class="state-triangle-detail"></div>
+                    <div class="state-triangle-detail border"></div>
                     </div>
                 </div>
-                <div class="backtest-toolbar-container pull-right">
 
-                                        <div id="deploy-algo-button-group" class="btn-group inline-block">
-                        <a _totalLiveCount="0" _remainCount="4" class="live-trade-btn btn disabled with-events" data-toggle="modal" data-target="" id="new-algorithm">模拟交易</a>
-                    </div>
-                                                                                <div class="btn-group inline-block" >
-                        <a class="btn-attributionAnaly btn disabled" id="btn-attributionAnaly" backtestId="995c8fd92c899638df49152c0d788f6c" href="javascript:void(0)" target="_blank">归因分析</a>
-                    </div>
-
-                    <div class="btn-group inline-block">
-                                                <a id="backtest-menu-toggle" href="#" data-toggle="dropdown" class="btn dropdown-toggle">导出<span class="caret" style="margin-left:5px"></span></a>
-                                                <ul class="dropdown-menu pull-right" id="backtest-toolbar-dropdown">
-                            <li>
-                                <a id="export-csv-button" href="" data-toggle="modal" download="data.xls">收益概述</a>
-                            </li>
-                            <li>
-                                <a id="export-transaction-button" href="#"  class="logdaochu" type="transaction"  backtestId="7e1f1a3275e03d18a3cfe1f7422a1fa3">交易详情</a>
-                            </li>
-                            <li>
-                                <a id="export-position-button" href="#" class="logdaochu" type="position" backtestId="631ad911c426225c6d310fa8bb97a070">持仓&收益</a>
-                            </li>
-                            <li>
-                                <a id="export-log-button" href="#"  class="logdaochu" type="log" backtestId="5cf2b4df4d73ce3fdc0b4eba42d895a7">日志</a>
-                            </li>
-                                                    </ul>
-                    </div>
-
-                </div>
-
-            </div>
-            <div id="backtest-results-box" class="algorithm-area">
-                <div id="ide-box" class="box ide mo-box" style="width: auto; ">
-                    <div id="splitter-outer-container">
-                        <div id="backtest-atomic-container" class="ui-widget ui-widget-content data-container clear" data-splitter-initialized="true">
-                            <div id="result-area" class="splitter-pane data-container">
-                                <ul id="result-tabs" class="nav nav-tabs vertical">
-
-                                    <li class="active">
-
-                                        <a href="#tab-summaryinfo" data-toggle="tab"><span class="nav-tabs-span tab-summaryinfo-span"></span>收益概述</a>
-                                    </li>
-                                    <li>
-
-                                        <a id="transactions-tab" href="#tab-transactioninfo" data-toggle="tab"><span class="nav-tabs-span transactions-tab-span"></span>交易详情</a>
-                                    </li>
-                                    <li>
-                                        <a id="positions-tab" href="#tab-positioninfo" data-toggle="tab"><span class="nav-tabs-span positions-tab-span"></span>每日持仓&amp;收益</a>
-                                    </li>
-
-                                    <li>
-                                        <a id="logs-tab" href="#tab-logs" data-toggle="tab"><span class="nav-tabs-span logs-tab-span"></span>日志输出</a>
-                                    </li>
-                                    <li>
-                                        <a id="profile-tab" href="#tab-profile" data-toggle="tab" class="enable-when-done"><span class="nav-tabs-span profile-tab-span"></span>性能分析</a>
-                                    </li>
-                                    <li>
-                                        <a id="code-tab" href="#tab-code" data-toggle="tab"><span class="nav-tabs-span code-tab-span"></span>策略代码</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header hidden"><span class="risk-info">风险指标</span></li>
-                                    <li>
-                                        <a href="#tab-algorithm_period_return" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span tab-algorithm-span"></span>策略收益</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-benchmark_period_return" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span tab-benchmark-span"></span>基准收益</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-alpha" data-toggle="tab" class="enable-when-done  risk"><span class="nav-tabs-span alpha-span"></span>阿尔法</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-beta" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span beta-span"></span>贝塔</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-sharpe" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span sharpe-span"></span>夏普比率</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-sortino" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span sortino-span"></span>索提诺比率</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-information" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span information-ratio-span"></span>信息比率</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-algo_volatility" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span volatility-span"></span>波动率</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-benchmark_volatility" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span benchmark-volatility-span"></span>基准波动率</a>
-                                    </li>
-                                    <li>
-                                        <a href="#tab-max_drawdown" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span max-drawdown-span"></span>最大回撤</a>
-                                    </li>
-
-                                </ul>
-                                <div class="after"></div>
-                            </div>
-                            <div id="splitter-pane" class="splitter-pane">
-                                <div class="dailybars-output height_100pct">
-                                    <div class="dailybars-results active" id="tab-summaryinfo">
-                                        <div class="title">收益概述</div>
-                                        <div id="headline-results" class="top-level-stats-container white-on-tour">
-                                            <div class="data-group clear">
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        策略收益
-                                                    </div>
-                                                    <div id="total_returns" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_long">
-                                                    <div class="stat-label">
-                                                        策略年化收益
-                                                    </div>
-                                                    <div id="year_returns" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_long">
-                                                    <div class="stat-label">
-                                                        超额收益
-                                                    </div>
-                                                    <div id="excess_return" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat benchmark-returns">
-                                                    <div class="stat-label">
-                                                        基准收益
-                                                    </div>
-                                                    <div id="benchmark_returns" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        阿尔法
-                                                    </div>
-                                                    <div id="alpha" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        贝塔
-                                                    </div>
-                                                    <div id="beta" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        夏普比率
-                                                    </div>
-                                                    <div id="sharpe" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_short">
-                                                    <div class="stat-label">
-                                                        胜率
-                                                    </div>
-                                                    <div id="win_ratio" class="stat-value">--</div>
-                                                </div>
-
-                                                <div class="top-level-stat backtest-detail__stats-item_short">
-                                                    <div class="stat-label">
-                                                        盈亏比
-                                                    </div>
-                                                    <div id="profit_loss_ratio" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        最大回撤
-                                                        <img class=" risk-icon  popover-right" data-toggle="popover" src="https://cdn.joinquant.com/std/algorithm/img/question-sign.png">
-                                                    </div>
-                                                    <div id="max_drawdown" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_short">
-                                                    <div class="stat-label">
-                                                        索提诺比率
-                                                    </div>
-                                                    <div id="sortino" class="stat-value">--</div>
-                                                </div>
-                                            </div>
-                                            <div class="data-group clear">
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        日均超额收益
-                                                    </div>
-                                                    <div id="avg_excess_return" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_long">
-                                                    <div class="stat-label">
-                                                        超额收益最大回撤
-                                                    </div>
-                                                    <div id="excess_return_max_drawdown" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_long">
-                                                    <div class="stat-label">
-                                                        超额收益夏普比率
-                                                    </div>
-                                                    <div id="excess_return_sharpe" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat benchmark-returns">
-                                                    <div class="stat-label">
-                                                        日胜率
-                                                    </div>
-                                                    <div id="day_win_ratio" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        盈利次数
-                                                    </div>
-                                                    <div id="win_count" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        亏损次数
-                                                    </div>
-                                                    <div id="lose_count" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        信息比率
-                                                    </div>
-                                                    <div id="information" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_short">
-                                                    <div class="stat-label">
-                                                        策略波动率
-                                                    </div>
-                                                    <div id="algorithm_volatility" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat backtest-detail__stats-item_short">
-                                                    <div class="stat-label">
-                                                        基准波动率
-                                                    </div>
-                                                    <div id="benchmark_volatility" class="stat-value">--</div>
-                                                </div>
-                                                <div class="top-level-stat">
-                                                    <div class="stat-label">
-                                                        最大回撤区间
-                                                    </div>
-                                                    <div id="max_drawdown_period" class="stat-value">--</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div id="portfolio-perf-label" class="chart-label portfolio-performance">
-                                            <div class="payload">
-                                                <span data-key="Returns" class="legend-item">
-                                                    <span class="square blue"></span>
-                                                    <span class="blue">策略收益</span>
-                                                </span>
-                                                <span data-key="ExceedReturn" class="legend-item">
-                                                    <span class="square yellow margin_5l"></span>
-                                                    <span class="yellow">超额收益</span>
-                                                </span>
-                                                <span data-key="Benchmark" class="legend-item">
-                                                    <span class="square red margin_5l"></span>
-                                                                                                            <span class="red full_backtest_benchmark" data-benchmark="true" title="沪深300">
-                                                            沪深300</span>  </span>
-
-                                                <span class="legend-item-radio" >
-                                                    <input class="chart-type" style="margin-top: 0" type="radio" name="chartType" value="line" checked disabled>
-                                                    <span>普通轴</span>
-                                                </span>
-                                                <span>
-                                                    <input class="chart-type" style="margin-top: 0" type="radio" name="chartType" value="log" disabled>
-                                                    <span>对数轴</span>
-                                                </span>
-                                                <span>
-                                                    <input id="exceedReturn" name="exceedReturn" style="margin-top: 0" type="checkbox" checked>
-                                                    <span>超额收益</span>
-
-
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div id="backtest-chart-outer-container"></div>
-                                    </div>
-                                    <div id="tab-transactioninfo" class="tab-pane hidden table-container " _hasDrawn=0>
-                                        <div class="transaction-info-pane">
-                                            <div class="table-container">
-                                                <div class="table-header">
-                                                    <div class="table-title clear">
-                                                        <div style="padding:11px 15px">交易详情</div>
-                                                    </div>
-                                                    <span class="hidden">
-                                                        <span class="separator">.</span>
-                                                        <a href="#" class="show-when-grouped expand-all-link" tableId="table-transactioninfo">展开全部</a>
-                                                        <span class="separator">.</span>
-                                                        <a href="#" class="show-when-grouped collapse-all-link" tableId="table-transactioninfo">收起全部</a>
-                                                    </span>
-                                                    <div class="filter-nav pull-right">
-                                                        <span class="grouping-controls">
-                                                            <button type="button" data-toggle="button" class="group-by-day btn active">Group by day</button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="transaction-column-select">
-                                                    <div id="transaction-column-select" class="column-select">
-                                                    </div>
-                                                </div>
-                                                <table id="table-transactioninfo" class=""><tr><td><img class="loading-image" style="height:18px">  正在加载...</td></tr></table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="tab-positioninfo" class="tab-pane hidden table-container " _hasDrawn=0>
-                                        <div class="transaction-info-pane">
-                                            <div class="table-container">
-                                                <div class="table-header">
-                                                    <div class="table-title">
-                                                        持仓&收益
-                                                    </div>
-                                                    <span class="hidden">
-                                                        <span class="separator">.</span>
-                                                        <a href="#" class="show-when-grouped expand-all-link" tableId="table-positioninfo">展开全部</a>
-                                                        <span class="separator">.</span>
-                                                        <a href="#" class="show-when-grouped collapse-all-link" tableId="table-positioninfo">收起全部</a>
-                                                    </span>
-                                                    <div class="filter-nav pull-right">
-                                                        <span class="grouping-controls">
-                                                            <button type="button" data-toggle="button" class="group-by-day btn active">Group by day</button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="position-column-select">
-                                                    <div id="position-column-select" class="column-select">
-                                                    </div>
-                                                </div>
-                                                <table id="table-positioninfo" class=""><tr><td><img class="loading-image" style="height:18px">  正在加载...<td></tr></table>
-                                                <div id="pager2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="tab-logs" class="hidden " _hasDrawn=0>
-                                        <div class="table-title logs-switch" ><span class="active" data-target="logInfo">日志输出</span><span data-target="error-log">错误日志</span></div>
-                                        <div id="logInfo" class="logs-container-warp">
-                                            <div style="height: 550px;" class="logs-container position-relative logs-output" id="log">
-                                                <pre class="">&nbsp;</pre>
-                                                <p id="logsMoreDownload" style="display: none;">更多日志，请点击此处<span class="blue" style="cursor: pointer;">下载</span></p>
-                                            </div>
-                                            <div class="logs-footer" id="logs-init">
-                                                <div class="loading-image border"></div>
-                                                <span class="message">正在加载日志...</span>
-                                            </div>
-                                            <div class="logs-finished hidden">
-                                                结束.
-                                            </div>
-                                        </div>
-                                        <div id="error-log" style="height: 550px; display: none;" class="logs-container-warp logs-container position-relative logs-output" >
-                                            <pre class=""></pre>
-                                        </div>
-                                    </div>
-
-                                    <div id="tab-code" class="hidden " _hasDrawn=0>
-                                        <div class="table-title" >策略代码</div>
-                                        <div class="live__algorithm-code-edter-wrapper">
-                                            <div class="live__algorithm-code-edter-tools-wrapper">
-                                                <div class="live__algorithm-code-edter-btns live__algorithm-code-edter-btns_operation hidden">
-                                                    <button type="button"
-                                                        class="btn live__algorithm-code-edter-btn live__algorithm-code-edter-modify-btn"
-                                                    >修改代码</button>
-                                                                                                            <button type="button"
-                                                            class="btn live__algorithm-code-edter-btn live__algorithm-code-edter-replace-btn"
-                                                        >替换代码</button>
-                                                                                                    </div>
-                                                <div class="live__algorithm-code-edter-btns live__algorithm-code-edter-btns_editing hidden">
-                                                    <button type="button"
-                                                        class="btn live__algorithm-code-edter-btn live__algorithm-code-modify-cancel-btn"
-                                                    >取消</button>
-                                                    <button type="button"
-                                                        class="btn live__algorithm-code-edter-btn live__algorithm-code-modify-complete-btn"
-                                                    >完成</button>
-                                                </div>
-                                            </div>
-                                            <div style="height:382px;" id="pane-code-view" _isLoad="0" _backtestId="b5aad0bdb7169729e3f63bfda1ebf420"></div>
-                                                                                            <div class="padding-box" style="background: #fff; padding: 10px; border-top: 20px solid #e8ecf0;">
-                                                    <div class="mb_18  clearfix" >
-                                                        代码变更记录
-                                                        <i class="icon icon-question-sign live__algorithm-code-replace-popover"></i>
-                                                    </div>
-                                                    <div class="mb_18  clearfix" >
-                                                        <div class="historyCodeList" style="padding-top: 10px;">加载中</div>
-                                                        <ul id="pageButton"></ul>
-                                                    </div>
-                                                </div>
-                                                                                    </div>
-                                    </div>
-
-                                    <div id="tab-profile" class="hidden " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                性能分析
-                                            </div>
-                                        </div>
-                                        <div class="logs-container position-relative logs-output" id="profile"><pre></pre></div>
-                                    </div>
-
-                                    <div id="tab-algorithm_period_return" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                策略收益
-                                            </div>
-                                        </div>
-                                        <table id="table-algorithm_period_return">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-benchmark_period_return" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                基准收益
-                                            </div>
-                                        </div>
-                                        <table id="table-benchmark_period_return">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-alpha" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                阿尔法
-                                            </div>
-                                        </div>
-                                        <table id="table-alpha">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-beta" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                贝塔
-                                            </div>
-                                        </div>
-                                        <table id="table-beta">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-sharpe" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                夏普比率
-                                            </div>
-                                        </div>
-                                        <table id="table-sharpe">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-sortino" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                索提诺比率
-                                            </div>
-                                        </div>
-                                        <table id="table-sortino">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-information" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                Information
-                                            </div>
-                                        </div>
-                                        <table id="table-information">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-
-                                    <div id="tab-algo_volatility" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                波动率
-                                            </div>
-                                        </div>
-                                        <table id="table-algo_volatility">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-                                    <div id="tab-benchmark_volatility" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                基准波动率
-                                            </div>
-                                        </div>
-                                        <table id="table-benchmark_volatility">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
-
-
-                                    <div id="tab-max_drawdown" class="tab-pane hidden risk-tab " _hasDrawn=0>
-                                        <div class="table-header">
-                                            <div class="table-title">
-                                                最大回撤
-                                            </div>
-                                        </div>
-                                        <table id="table-max_drawdown">
-                                            <span class="risk-loading"><img class="loading-image" style="height:18px">  正在加载...</span>
-                                        </table>
-                                    </div>
+                <div id="main-pane" class="main-pane">
+                    <div id="backtest-settings-outer-container" class="clearfix">
+                        <div class="left-container pull-left" >
+                            <div class="inline-block setting">
+                                <span>日期：</span>
+                                <div id="backtest-settings-summary-payload" class="backtest-settings-summary-payload white-on-tour inline-block">
+                                    <span class="date backtest_start_date_display" id="startDate">{{ n1 }}</span>
+                                    <span> 到 </span>
+                                    <span class="date backtest_end_date_display" id="endDate">{{ n2 }}</span>，
+                                    <span class="capital backtest_capitalbase_display" id="baseCapital">￥100000</span>，
+                                    <span id="backtestCapital" _cash="100000" class="hidden"></span>
+                                    <span class="capital backtest_datafrequency_display" id="frequency" value="day">每月</span>
                                 </div>
                             </div>
-
-                            <div class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4 class="modal-title">Modal title</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>One fine body…</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-
-                            <div id="backtest-detail" class="hidden">
-                                <table class="table table-condensed">
-                                    <tbody>
-                                    <tr>
-                                        <td class="category">策略名称:</td>
-                                        <td class="backtest-index-display">小市值策略</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="category">开始时间:</td>
-                                        <td class="backtest_start_date_display">2022-07-03</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="category">结束时间:</td>
-                                        <td class="backtest_end_date_display">2024-07-03</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="category">初始资金:</td>
-                                        <td class="backtest_capitalbase_display">￥100000</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="category">添加时间:</td>
-                                        <td class="backtest_started_at_display">2024-07-09 22:32:43</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="category">完成状态:</td>
-                                        <td class="backtest_finished_at_display" id="detail-finished">N/A</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="category">数据频率:</td>
-                                        <td class="backtest_datafrequency_display capitalize">每天</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                        </div>
+                        <div class="backtest-toolbar-container pull-right">
+                            <div id="deploy-algo-button-group" class="btn-group inline-block">
+                                <a _totalLiveCount="0" _remainCount="4" class="live-trade-btn btn disabled with-events" data-toggle="modal" data-target="" id="new-algorithm">模拟交易</a>
                             </div>
-
+                            <div class="btn-group inline-block" >
+                                <a class="btn-attributionAnaly btn disabled" id="btn-attributionAnaly" backtestId="995c8fd92c899638df49152c0d788f6c" href="javascript:void(0)" target="_blank">归因分析</a>
+                            </div>
+                            <div class="btn-group inline-block">
+                                <a id="backtest-menu-toggle" href="#" data-toggle="dropdown" class="btn dropdown-toggle">导出<span class="caret" style="margin-left:5px"></span></a>
+                                <ul class="dropdown-menu pull-right" id="backtest-toolbar-dropdown">
+                                    <li>
+                                        <a id="export-csv-button" href="" data-toggle="modal" download="data.xls">收益概述</a>
+                                    </li>
+                                    <li>
+                                        <a id="export-transaction-button" href="#"  class="logdaochu" type="transaction"  backtestId="7e1f1a3275e03d18a3cfe1f7422a1fa3">交易详情</a>
+                                    </li>
+                                    <li>
+                                        <a id="export-position-button" href="#" class="logdaochu" type="position" backtestId="631ad911c426225c6d310fa8bb97a070">持仓&收益</a>
+                                    </li>
+                                    <li>
+                                        <a id="export-log-button" href="#"  class="logdaochu" type="log" backtestId="5cf2b4df4d73ce3fdc0b4eba42d895a7">日志</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="backtest-results-box" class="algorithm-area">
+                        <div id="ide-box" class="box ide mo-box" style="width: auto; ">
+                            <div id="splitter-outer-container">
+                                <div id="backtest-atomic-container" class="ui-widget ui-widget-content data-container clear" data-splitter-initialized="true">
+                                    <div id="result-area" class="splitter-pane data-container">
+                                        <ul id="result-tabs" class="nav nav-tabs vertical">
+                                            <li class="active">
+                                                <a href="#tab-summaryinfo" data-toggle="tab"><span class="nav-tabs-span tab-summaryinfo-span"></span>收益概述</a>
+                                            </li>
+                                            <li>
+                                                <a id="transactions-tab" href="#tab-transactioninfo" data-toggle="tab"><span class="nav-tabs-span transactions-tab-span"></span>交易详情</a>
+                                            </li>
+                                            <li>
+                                                <a id="positions-tab" href="#tab-positioninfo" data-toggle="tab"><span class="nav-tabs-span positions-tab-span"></span>每日持仓&amp;收益</a>
+                                            </li>
+                                            <li>
+                                                <a id="logs-tab" href="#tab-logs" data-toggle="tab"><span class="nav-tabs-span logs-tab-span"></span>日志输出</a>
+                                            </li>
+                                            <li>
+                                                <a id="profile-tab" href="#tab-profile" data-toggle="tab" class="enable-when-done"><span class="nav-tabs-span profile-tab-span"></span>性能分析</a>
+                                            </li>
+                                            <li>
+                                                <a id="code-tab" href="#tab-code" data-toggle="tab"><span class="nav-tabs-span code-tab-span"></span>策略代码</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li class="nav-header hidden"><span class="risk-info">风险指标</span></li>
+                                            <li>
+                                                <a href="#tab-algorithm_period_return" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span tab-algorithm-span"></span>策略收益</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-benchmark_period_return" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span tab-benchmark-span"></span>基准收益</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-alpha" data-toggle="tab" class="enable-when-done  risk"><span class="nav-tabs-span alpha-span"></span>阿尔法</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-beta" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span beta-span"></span>贝塔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-sharpe" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span sharpe-span"></span>夏普比率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-sortino" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span sortino-span"></span>索提诺比率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-information" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span information-ratio-span"></span>信息比率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-algo_volatility" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span volatility-span"></span>波动率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-benchmark_volatility" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span benchmark-volatility-span"></span>基准波动率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-max_drawdown" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span max-drawdown-span"></span>最大回撤</a>
+                                            </li>
+                                        </ul>
+                                        <div class="after"></div>
+                                    </div>
+                                    <div id="splitter-pane" class="splitter-pane">
+                                        {% block content %}
+                                        {% endblock %}
+                                    </div>
+                                    <div class="modal fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title">Modal title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>One fine body…</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="tanceng hidden ">
-    <div class="waitanceng">
-        <div class="tanceng-body">
-            <div class="fright x-new"><img src="https://cdn.joinquant.com/std/algorithm/img/x-new.png"></div>
-            <div class="button-new live-trade-btn" _totalLiveCount="0" _remainCount="4" rel="popover" data-trigger="hover" data-placement="bottom" data-original-title="" title="">
-                <a>创建模拟交易</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="hidden" id="backtest-select-dom">
-    <div class="col-lg-12" style="margin-bottom:20px;">
-        您可以选择同一个策略中的其它回测，确认后，所选回测的代码将应用于本次模拟交易。
-    </div>
-
-    <div class="col-lg-12 select-container">
-        <select id="backtest" class="show-tick form-control">
-            <option value="">选择一个回测</option>
-        </select>
-    </div>
-    <div class="col-lg-12 select-container">
-        <select id="pyVersion" class="form-control">
-
-        </select>
     </div>
 </div>
 <!-- loading -->
 
-<!-- 新建模拟交易模态框 -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" style="line-height:1.2;margin-top:-8px" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新建模拟交易</h4>
-      </div>
-      <div class="modal-body clear js-modal-body" style="padding:0">
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" id="submit">确定</button>
-      </div>
+    <div id="leftsead" class="">
+      <ul></ul>
+      <input type="text" class="timeStamp" value="1719998041744" style="display:none">
+      <input type="text" class="js-cdn-path" value="https://cdn.joinquant.com" style="display:none">
     </div>
-  </div>
-</div>
-<div class="hidden js-modal-content">
-
-  <p class="hidden tcenter js-algorithm-tips" style="margin: 0;background:rgba(251,64,68,0.1);color:#FB4044;line-height:32px;">
-    无可用模拟交易位，请点击
-    <a style="color:#4184E1"
-      href="/view/credits/detail/4e3d70e55a915a8f9913b75816898146?direct=/algorithm/trade/list"
-    >前往购买</a>
-  </p>
-  <p class="hidden tcenter trade-list_new-trade-no-vip-tip" style="margin: 0;background:rgba(251,64,68,0.1);color:#FB4044;line-height:32px;">
-    无权限，<a style="color:#4184E1"
-      target="_blank"
-      href="/view/vip/charge"
-    >成为VIP</a>即可创建tick频率模拟交易
-  </p>
-
-  <form action="" style="padding:36px 48px 0">
-      <div class="new-item clear">
-          <span class="item-title">交易名称</span>
-          <input type="text" class="item-input" name="name" datatype="*1-100" placeholder="这是一个简单的策略" errormsg="请填写交易名称，模拟交易名称应不大于100位">
-          <span class="error_tips hidden"></span>
-      </div>
-      <div class="new-item clear">
-          <span class="item-title">选择策略</span>
-          <select name="algorithmId" class="item-select hidden"  datatype="*" id="select-algorithm"  errormsg="请选择策略"> </select>
-          <span class="error_tips hidden"></span>
-      </div>
-      <div class="new-item clear">
-          <span class="item-title">选择回测</span>
-          <select name="backtestId" class="item-select hidden" id="select-backtest"  datatype="*" errormsg="请选择回测"></select>
-          <span class="error_tips hidden"></span>
-      </div>
-      <div class="new-item clear">
-          <span class="item-title">初始资金</span>
-          <!-- 2100000000 -->
-          <input type="number" class="item-input basecapital" name="basecapital" value="10000" step="1000" min="1000" placeholder="请填写初始资金"  errormsg="请填写大于等于1000的初始资金">
-          <span class="error_tips hidden"></span>
-      </div>
-
-      <div class="new-item fleft">
-          <span class="item-title">运行频率</span>
-          <select name="frequency" class="item-select" id="select-frequency"  datatype="*" errormsg="请选择运行频率">
-              <option value="day">每天</option>
-              <option value="minute">分钟</option>
-              <option value="tick">tick</option>
-          </select>
-          <span class="error_tips hidden"></span>
-      </div>
-      <div class="new-item fright">
-          <span class="item-title">开始日期</span>
-          <input type="text" name="startTime" class="item-input datepicker tcenter" id="startTime"  noLimit="" value="" readonly=""  datatype="*" errormsg="请选择开始日期">
-
-          <input type="text" readonly="readonly" id="currentTime" name="currentTime" class="hidden item-input datepicker tcenter" id="currentTime" >
-
-          <span class="error_tips hidden"></span>
-      </div>
-                      <div class="new-item clear">
-          <span class="item-title">模拟交易位</span>
-          <select name="expireTime" class="item-select" id="select-expireTime" datatype="*" errormsg="请选择模拟交易位"></select>
-          <span class="error_tips hidden"></span>
-        </div>
-                    <div class="new-item clear">
-          <span class="item-title">Python版本</span>
-          <input type="text" name="pyVersion" class="item-input" id="pyVersionSelect" disabled>
-          <span class="error_tips hidden"></span>
-      </div>
-  </form>
-</div>
-
-<!-- 购买模拟交易位模态框 -->
-<div class="modal fade bs-example-modal-sm getNewAlgorithmDialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
- <div class="modal-dialog modal-sm" role="document" >
-   <div class="modal-content">
-
-   </div>
- </div>
-</div>
-
-<div class="modal-content-html hidden">
-  {{#getNewTrade}}
-   <div class="modal-header">
-     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-       <span aria-hidden="true">&times;</span>
-     </button>
-     <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
-   </div>
-   <div class="modal-body">
-
-     <div class="modal-body-item clear">
-       <div class="modal-body-item-txt fleft">购买方式：</div>
-       <div class="modal-body-item-val fleft">{{buyWay}}</div>
-     </div>
-     <div class="modal-body-item clear">
-       {{#renewal}}
-       <div class="modal-body-item-txt fleft">交易位：</div>
-      {{/renewal}}
-      {{^renewal}}
-      <div class="modal-body-item-txt fleft modal-body-item-txt-frequency">交易位频率：</div>
-       {{/renewal}}
-       <div class="modal-body-item-val fleft modal-body-item-val-frequency">
-         {{#renewal}}
-         <span style="vertical-align: top;max-width:220px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;">{{tradeName}}</span>(<span style="color: #4184E1;">{{tradeTime}}</span>到期) {{/renewal}}
-
-         {{^renewal}}
-         <div class="val-item {{recommendFrequencyday}}">
-           {{#recommendFrequencyday}}
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="frequency" value="Day" checked>
-           {{/recommendFrequencyday}}
-           {{^recommendFrequencyday}}
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="frequency" value="Day">
-           {{/recommendFrequencyday}}
-           <span>每天</span>
-         </div>
-         <div class="val-item {{recommendFrequencyminute}}">
-           {{#recommendFrequencyminute}}
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="frequency" value="Minute" checked>
-           {{/recommendFrequencyminute}}
-           {{^recommendFrequencyminute}}
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="frequency" value="Minute">
-           {{/recommendFrequencyminute}}
-           <span>分钟</span>
-         </div>
-         <div class="val-item {{recommendFrequencytick}}">
-           {{#recommendFrequencytick}}
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="frequency" value="Tick" checked>
-           {{/recommendFrequencytick}}
-           {{^recommendFrequencytick}}
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="frequency" value="Tick">
-           {{/recommendFrequencytick}}
-           <span>Tick</span>
-         </div>
-         {{/renewal}}
-       </div>
-     </div>
-
-     {{#renewal}}
-     <div class="modal-body-item clear">
-       <div class="modal-body-item-txt fleft">频率：</div>
-       <div class="modal-body-item-val fleft js-getNewAlgorithm-frequency">
-          {{frequency}}
-       </div>
-     </div>
-     {{/renewal}}
-
-     {{#data}}
-     <div class="modal-body-item clear">
-       <div class="modal-body-item-txt modal-body-item-txt-time fleft">有效期：</div>
-       <div class="modal-body-item-val fleft modal-body-item-val-time">
-         <div class="val-item">
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="month" value="one" data-value="{{one}}" data-sale="{{oneSaleData}}">
-           <p class="val-item-month">1个月</p>
-           <p class="val-item-amount">
-             <span class="">{{one}}积分</span>
-             {{#oneSale}}
-             <span class=" val-item-amount-sale">/{{oneSale}}折</span>
-             {{/oneSale}}
-           </p>
-         </div>
-         <div class="val-item">
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="month" value="three" data-value="{{three}}" data-sale="{{threeSaleData}}">
-           <p class="val-item-month">3个月</p>
-           <p class="val-item-amount">
-             <span class="">{{three}}积分</span>
-             {{#threeSale}}
-             <span class=" val-item-amount-sale">/{{threeSale}}折</span>
-             {{/threeSale}}
-           </p>
-         </div>
-         <div class="val-item">
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="month" value="six"  data-value="{{six}}" data-sale="{{sixSaleData}}">
-           <p class="val-item-month">6个月</p>
-           <p class="val-item-amount">
-             <span class="">{{six}}积分</span>
-             {{#sixSale}}
-             <span class=" val-item-amount-sale">/{{sixSale}}折</span>
-             {{/sixSale}}
-           </p>
-         </div>
-         <div class="val-item">
-           <input type="radio" class="jq-getNewAlgorithm-radio" name="month" value="twel" data-value="{{twel}}" data-sale="{{twelSaleData}}">
-           <p class="val-item-month">12个月</p>
-           <p class="val-item-amount">
-             <span class="">{{twel}}积分</span>
-             {{#twelSale}}
-             <span class="val-item-amount-sale">/{{twelSale}}折</span>
-             {{/twelSale}}
-           </p>
-         </div>
-       </div>
-     </div>
-     {{/data}}
-
-     {{^renewal}}
-     <div class="modal-body-item clear">
-       <div class="modal-body-item-txt modal-body-item-txt-count fleft">数量：</div>
-       <div class="modal-body-item-val fleft">
-         <div class="val-number-input">
-           <input type="number" name="count" value="1" class="fleft" autocomplete="off" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))">
-           <div class="fleft">
-             <div class="js-getNewAlgorithmCount-up"></div>
-             <div class="js-getNewAlgorithmCount-down disabled"></div>
-           </div>
-         </div>
-       </div>
-     </div>
-     {{/renewal}}
-     <div class="modal-body-item clear">
-       <div class="modal-body-item-txt fleft">应扣积分：</div>
-       <div class="modal-body-item-val fleft modal-body-item-val-amount" data-amount="{{data.deductible}}">
-        {{data.deductible}}
-       </div>
-     </div>
-     <div class="modal-body-item clear">
-       <div class="modal-body-item-txt fleft">可用积分：</div>
-       <div class="modal-body-item-val fleft js-creditsAmount">
-        <span class="js-creditsAmount-span">{{creditsAmount}}</span>
-        <span class="modal-body-item-val-tips hidden">(积分不足，<span class="js-gotoRecharge">去充值</span>)</span>
-       </div>
-     </div>
-
-   </div>
-   <div class="modal-footer">
-     <button type="button" class="btn btn-primary js-getNewAlgorithm-btn" data-name="{{dataName}}" data-value="{{dataValue}}" data-buyWay="{{buyWay}}" data-backtestSpaceId="{{backtestSpaceId}}">确认支付</button>
-    </div>
-  {{/getNewTrade}}
-</div>
-
-            </div>
-            <input type="hidden" id="imagePath" value="https://image.joinquant.com"/>
-            <input type="hidden" id="cdnPath" value="https://cdn.joinquant.com"/>
-            <!--/body-->
 
 
-
-        </div>
-                  <!-- 回到顶部 联系我们 -->
-<div id="leftsead" class="">
-  <ul></ul>
-  <input type="text" class="timeStamp" value="1719998041744" style="display:none">
-  <input type="text" class="js-cdn-path" value="https://cdn.joinquant.com" style="display:none">
-</div>
-        
-
-        <script>
+    <script>
         var g_staticHost = 'https://cdn.joinquant.com';
 
-                    var isInnerEnv = false;
-        
-                var g_isMobile = false;
-        
-                var g_isLogin = true;
-        
-                var g_isWinApp= false;
-        
-        </script>
-        <script>
-          window.tokenData = {
-            name: "token",
-            value: "99bf882c3d26ecbbae537244e9540e7692ecb3a2aa9ada5ef260aaeae83bee7d5f4c784338b31dc8"
-          }
-        </script>
+        var isInnerEnv = false;
 
-        
-	               <script src="https://cdn.joinquant.com/common/js/mustache.min.js"></script>
-        <script src="https://cdn.joinquant.com/common/js/lib.min.js?v=1719998041744"></script>
-        <script src="https://cdn.joinquant.com/themes/jq/static/common/js/setGroIO.js?v=1719998041744"></script>
-                
-        <script src="https://cdn.joinquant.com/dist/static_v2/venders/common.js"></script>
-        <script src="https://cdn.joinquant.com/dist/static_v2/util.js?v=1719998041744"></script>
-        <script src="https://cdn.joinquant.com/dist/static_v2/component.js?v=1719998041744" ></script>
-        <script src="https://cdn.joinquant.com/dist/static_v2/common/common.header.module.bundle.js?v=1719998041744" ></script>
-        <script src="https://cdn.joinquant.com/dist/static_v2/global/user/login/index/index.module.bundle.js?v=1719998041744" ></script>
-        <script src="https://cdn.joinquant.com/themes/jq/dist/static_v2/global/include/include/include.module.bundle.js?v=1719998041744" ></script>
-        <script src="https://cdn.joinquant.com/themes/jq/static/dist/asset/general/baidu-tongji.bundle.js?v=1719998041744" ></script>
-                  <script src="https://cdn.joinquant.com/themes/jq/dist/static_v2/default/backtotop/detail/index/index.module.bundle.js?v=1719998041744" ></script>
-                
-	    
-        
-        
-        <script>
-            // 显示隐藏nav选项
-            $('.dropdown_menu').click(function(){
-                return false;
-            })
-            $('.dropdown_menu').hover(function(){
-                var href = $(this).attr('href');
-                $('.nav-dropdown-item').addClass('hidden');
-                $(href).removeClass('hidden');
-            },function(){});
+        var g_isMobile = false;
 
-            $('ul.nav').find('li').find('a').hover(function(){
-                if ($(this).hasClass('dropdown_menu')) {
-                    return;
-                }
-               $('.nav-dropdown-item').addClass('hidden');
-            })
-            $('#kk_nav').mouseleave(function(){
-                $('.nav-dropdown-item').addClass('hidden');
-            })
-        </script>
+        var g_isLogin = true;
 
-        <script>
-        $('.dropdown-toggle').dropdown();
-        $("body").delegate("a","click",function(){
-            if ($(this)[0].hostname.length>0 && $(this)[0].hostname != window.location.hostname) {
-                window.open($(this)[0].href);
-                return false;
+        var g_isWinApp= false;
+
+    </script>
+    <script>
+      window.tokenData = {
+        name: "token",
+        value: "99bf882c3d26ecbbae537244e9540e7692ecb3a2aa9ada5ef260aaeae83bee7d5f4c784338b31dc8"
+      }
+    </script>
+
+    <script src="https://cdn.joinquant.com/common/js/mustache.min.js"></script>
+    <script src="https://cdn.joinquant.com/common/js/lib.min.js?v=1719998041744"></script>
+    <script src="https://cdn.joinquant.com/themes/jq/static/common/js/setGroIO.js?v=1719998041744"></script>
+
+    <script src="https://cdn.joinquant.com/dist/static_v2/venders/common.js"></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/util.js?v=1719998041744"></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/component.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/common/common.header.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/global/user/login/index/index.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/themes/jq/dist/static_v2/global/include/include/include.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/themes/jq/static/dist/asset/general/baidu-tongji.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/themes/jq/dist/static_v2/default/backtotop/detail/index/index.module.bundle.js?v=1719998041744" ></script>
+
+    <script>
+        // 显示隐藏nav选项
+        $('.dropdown_menu').click(function(){
+            return false;
+        })
+        $('.dropdown_menu').hover(function(){
+            var href = $(this).attr('href');
+            $('.nav-dropdown-item').addClass('hidden');
+            $(href).removeClass('hidden');
+        },function(){});
+
+        $('ul.nav').find('li').find('a').hover(function(){
+            if ($(this).hasClass('dropdown_menu')) {
+                return;
             }
-        });
+           $('.nav-dropdown-item').addClass('hidden');
+        })
+        $('#kk_nav').mouseleave(function(){
+            $('.nav-dropdown-item').addClass('hidden');
+        })
+    </script>
 
+    <script>
+    $('.dropdown-toggle').dropdown();
+    $("body").delegate("a","click",function(){
+        if ($(this)[0].hostname.length>0 && $(this)[0].hostname != window.location.hostname) {
+            window.open($(this)[0].href);
+            return false;
+        }
+    });
 	</script>
-        <script charset="UTF-8" src="https://cdn.joinquant.com/common/js/mustache.min.js?v=1719998041744"></script>
-<script charset="UTF-8" src="https://cdn.joinquant.com/default/js/Validform_v5.3.2_min.js?v=1719998041744"></script>
-<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/std/third/comboSelect/jquery.combo.select.js"></script>
+    <script charset="UTF-8" src="https://cdn.joinquant.com/common/js/mustache.min.js?v=1719998041744"></script>
+    <script charset="UTF-8" src="https://cdn.joinquant.com/default/js/Validform_v5.3.2_min.js?v=1719998041744"></script>
+    <script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/std/third/comboSelect/jquery.combo.select.js"></script>
 	<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/third/jquery-ui/jquery-ui-jq.min.js?v=1719998041744"></script>
 	<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/third/ace/ace.min.js?v=1719998041744"></script>
 	<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/themes/jq/static/algorithm/js/detail.min.js?v=1719998041744"></script>
 	<!-- 模拟交易位vip校验功能 -->
 	<script charset="UTF-8" src="https://cdn.joinquant.com/themes/jq/static/algorithm/js/newTradeStd.min.js?v=1719998041744"></script>
-<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/std/third/loading/loading.js"></script>
-
+    <script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/std/third/loading/loading.js"></script>
 	<script charset="UTF-8" src="https://cdn.joinquant.com/themes/jq/static/algorithm/js/newTrade.min.js?v=1719998041744"></script>
 
-	            <div style="display:none">
-	    <script src="https://s95.cnzz.com/z_stat.php?id=1256107754&web_id=1256107754" language="JavaScript"></script>
-        <!-- 返回顶部 -->
-
+	<div style="display:none">
+        <script src="https://s95.cnzz.com/z_stat.php?id=1256107754&web_id=1256107754" language="JavaScript"></script>
+            <!-- 返回顶部 -->
         <script>
              var img = new Image();
              var referer = "";
@@ -1176,6 +410,6 @@
                 d.body.appendChild(j);
             })(window, document, 'ysf');
         </script>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

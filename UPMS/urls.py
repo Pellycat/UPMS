@@ -44,7 +44,8 @@ urlpatterns = [
     path('role/<int:nid>/assignfunction/', views.assignfunction, name='assign_function'),
     path('<int:nid>/permission/', views.checkpermission, name='check_permission'),
     path('analysis/',analysis_views.choice_gupiao),
-    path('portfolio/', analysis_views.data_process)
+    path('portfolio/label/', analysis_views.label),  # 权重表展示
+
 
 
 ]

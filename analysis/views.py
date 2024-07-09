@@ -8,6 +8,12 @@ import numpy as np
 from .models import Lasso_Predicted_Return,EN_Predicted_Return,Rd_Predicted_Return,Real_Return
 
 
+weights_min_var_df=pd.DataFrame()
+weights_util_max_df=pd.DataFrame()
+weights_equal_df=pd.DataFrame()
+start=''
+end=''
+
 def data_process(data, capital, num, start, end):
     # 确保 Date 列为 datetime 类型
     data['Date'] = pd.to_datetime(data['Date'])
@@ -313,14 +319,11 @@ def data_process(data, capital, num, start, end):
         {date: np.pad(weights, (0, max_length - len(weights)), 'constant', constant_values=np.nan)
          for date, weights in weights_equal.items()}).T
 
-    weights_min_var_html = weights_min_var_df.to_html(classes='table table-striped')
-    weights_util_max_html = weights_util_max_df.to_html(classes='table table-striped')
-    weights_equal_html = weights_equal_df.to_html(classes='table table-striped')
-
-    return weights_min_var_html, weights_util_max_html, weights_equal_html
+    return weights_min_var_df, weights_util_max_df, weights_equal_df
 
 
 def choice_gupiao(request):
+    global weights_min_var_df, weights_util_max_df, weights_equal_df, start, end
     if request.method == 'POST':
         name = request.POST.get('name')
         model = request.POST.get('algorithmId')
@@ -333,21 +336,42 @@ def choice_gupiao(request):
         if model == "Lasso":
             result = Lasso_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_html, weights_util_max_html, weights_equal_html = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df = data_process(result_df, capital, num, start, end)
             return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
 
         elif model == "EN":
             result = EN_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_html, weights_util_max_html, weights_equal_html = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df = data_process(result_df, capital, num, start, end)
             return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
         elif model == "Ridge":
             result = Rd_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_html, weights_util_max_html, weights_equal_html = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df = data_process(result_df, capital, num, start, end)
             return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
         else:
             return JsonResponse({'message': '请选择合适的模型'})
 
-
     return render(request, 'inputadd.html')
+
+
+def label(request):
+    global weights_min_var_df, weights_util_max_df, weights_equal_df, start, end
+    # 检查全局变量是否为 DataFrame 实例
+    if not isinstance(weights_min_var_df, pd.DataFrame):
+        weights_min_var_df = pd.DataFrame()
+    if not isinstance(weights_util_max_df, pd.DataFrame):
+        weights_util_max_df = pd.DataFrame()
+    if not isinstance(weights_equal_df, pd.DataFrame):
+        weights_equal_df = pd.DataFrame()
+
+    weights_min_var_html = weights_min_var_df.to_html(classes='table table-striped')
+    weights_util_max_html = weights_util_max_df.to_html(classes='table table-striped')
+    weights_equal_html = weights_equal_df.to_html(classes='table table-striped')
+
+    return render(request, 'portfolio_label.html', {
+        'weights_min_var_html': weights_min_var_html,
+        'weights_util_max_html': weights_util_max_html,
+        'weights_equal_html': weights_equal_html,
+        'n1': start, 'n2': end
+    })
