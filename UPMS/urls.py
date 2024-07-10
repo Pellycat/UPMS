@@ -53,5 +53,6 @@ urlpatterns = [
     path('portfolio/calculate_and_return_metrics_html', analysis_views.calculate_and_return_metrics_html),  # 收益概述表展示
     path('portfolio/thermodynamic_chart/min', analysis_views.thermodynamic_chart_min),  # 热力图展示
     path('portfolio/thermodynamic_chart/max', analysis_views.thermodynamic_chart_max),
-    path('portfolio/thermodynamic_chart/equal', analysis_views.thermodynamic_chart_equal)
+    path('portfolio/thermodynamic_chart/equal', analysis_views.thermodynamic_chart_equal),
+    path('portfolio/stocks_choose', analysis_views.stocks_choose)  # 股票选择展示
 ]

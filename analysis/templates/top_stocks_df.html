@@ -1,0 +1,30 @@
+{% extends 'portfolio_show.html' %}
+
+{% block content %}
+    <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+        <h2>股票代码选择展示表</h2>
+        <h3>Stocks Choose</h3>
+        <div style="overflow-x: auto;">
+            {{ top_stocks_df_html|safe }}
+        </div>
+    </div>
+
+    <style>
+        .custom-table th:nth-child(2), .custom-table td:nth-child(2) {
+            min-width: 150px;  /* 调整这个宽度直到日期能在一行显示 */
+        }
+        .container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .container th, .container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .container th {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock %}

@@ -14,6 +14,7 @@ weights_min_var_df=pd.DataFrame()
 weights_util_max_df=pd.DataFrame()
 weights_equal_df=pd.DataFrame()
 monthly_excess_returns_df=pd.DataFrame()
+top_stocks_df=pd.DataFrame()
 start=''
 end=''
 
@@ -117,6 +118,7 @@ def data_process(data, capital, num, start, end):
     result_df.dropna(inplace=True)
 
     top_stocks_df.drop("yearmonth",axis=1,inplace=True)
+
     # 定义效用最大化函数
     def util_max(cov_matrix, expect_returns, gamma):
         Q = gamma * cov_matrix
@@ -147,6 +149,7 @@ def data_process(data, capital, num, start, end):
     # 定义等权重分配函数
     def equal_weight_opt(num_assets):
         return np.ones(num_assets) / num_assets
+
 
     # 数据加载和预处理
     monthly_returns = monthly_excess_returns
@@ -319,12 +322,13 @@ def data_process(data, capital, num, start, end):
     weights_equal_df = pd.DataFrame(
         {date: np.pad(weights, (0, max_length - len(weights)), 'constant', constant_values=np.nan)
          for date, weights in weights_equal.items()}).T
+    print(top_stocks_df)
 
-    return weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df
+    return weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, top_stocks_df
 
 
 def choice_gupiao(request):
-    global weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, start, end
+    global weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, top_stocks_df, start, end
     if request.method == 'POST':
         name = request.POST.get('name')
         model = request.POST.get('algorithmId')
@@ -337,18 +341,18 @@ def choice_gupiao(request):
         if model == "Lasso":
             result = Lasso_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, top_stocks_df = data_process(result_df, capital, num, start, end)
             return redirect("/portfolio/calculate_and_return_metrics_html")
 
         elif model == "EN":
             result = EN_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, top_stocks_df = data_process(result_df, capital, num, start, end)
             return redirect("/portfolio/calculate_and_return_metrics_html")
         elif model == "Ridge":
             result = Rd_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
-            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
+            weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df, top_stocks_df = data_process(result_df, capital, num, start, end)
             return redirect("/portfolio/calculate_and_return_metrics_html")
         else:
             return JsonResponse({'message': '请选择合适的模型'})
@@ -660,4 +664,17 @@ def thermodynamic_chart_equal(request):
         'n1': start,
         'n2': end,
         'image_url': image_url
+    })
+
+def stocks_choose(request):
+    global top_stocks_df, start, end
+    # 检查全局变量是否为 DataFrame 实例
+    if not isinstance(top_stocks_df, pd.DataFrame):
+        top_stocks_df = pd.DataFrame()
+    top_stocks_df.dropna(inplace=True)
+    top_stocks_df = top_stocks_df.to_html(classes='table table-striped custom-table')
+
+    return render(request, 'top_stocks_df.html', {
+        'top_stocks_df_html': top_stocks_df,
+        'n1': start, 'n2': end
     })
