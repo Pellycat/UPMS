@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{jquery}" />
+    <file url="file://$PROJECT_DIR$" libraries="{combo.select, common, d65beefd7552d92ee02344b3cc6173de, iconfont, jquery, jquery.combo.select, loading, mustache, vds}" />
   </component>
 </project>

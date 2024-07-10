@@ -1,6 +1,6 @@
 {% load static %}
 <!doctype html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <title>策略展示</title>
@@ -108,7 +108,7 @@
          var vds = document.createElement('script');
          vds.type='text/javascript';
          vds.async = true;
-         vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'assets.giocdn.com/vds.js';
+         vds.src = ('https:' === document.location.protocol ? 'https://' : 'http://') + 'assets.giocdn.com/vds.js';
          var s = document.getElementsByTagName('script')[0];
          s.parentNode.insertBefore(vds, s);
        // }
@@ -203,7 +203,10 @@
                                 <div id="backtest-atomic-container" class="ui-widget ui-widget-content data-container clear" data-splitter-initialized="true">
                                     <div id="result-area" class="splitter-pane data-container">
                                         <ul id="result-tabs" class="nav nav-tabs vertical">
-                                            <li class="active">
+                                            <li>
+                                                <a id="positions-tab" href="/portfolio/input"><span class="nav-tabs-span positions-tab-span"></span>参数输入</a>
+                                            </li>
+                                            <li>
                                                 <a href="/portfolio/calculate_and_return_metrics_html"><span class="nav-tabs-span tab-summaryinfo-span"></span>收益概述</a>
                                             </li>
                                             <li>
@@ -221,16 +224,14 @@
                                             <li>
                                                 <a id="transactions-tab" href="/portfolio/monthly_excess_returns"><span class="nav-tabs-span transactions-tab-span"></span>组合月超额收益率图</a>
                                             </li>
-                                            <li class="divider"></li>
-                                            <li class="nav-header hidden"><span class="risk-info">风险指标</span></li>
                                             <li>
-                                                <a href="#tab-algorithm_period_return" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span tab-algorithm-span"></span>策略收益</a>
+                                                <a href="/portfolio/thermodynamic_chart/min"><span class="nav-tabs-span tab-algorithm-span"></span>最小方差投资组合权重热力图</a>
                                             </li>
                                             <li>
-                                                <a href="#tab-benchmark_period_return" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span tab-benchmark-span"></span>基准收益</a>
+                                                <a href="/portfolio/thermodynamic_chart/max"><span class="nav-tabs-span tab-benchmark-span"></span>最大化效用投资权重热力图</a>
                                             </li>
                                             <li>
-                                                <a href="#tab-alpha" data-toggle="tab" class="enable-when-done  risk"><span class="nav-tabs-span alpha-span"></span>阿尔法</a>
+                                                <a href="/portfolio/thermodynamic_chart/equal"><span class="nav-tabs-span alpha-span"></span>等权重投资组合权重热力图</a>
                                             </li>
                                             <li>
                                                 <a href="#tab-beta" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span beta-span"></span>贝塔</a>
@@ -353,7 +354,7 @@
     <script>
     $('.dropdown-toggle').dropdown();
     $("body").delegate("a","click",function(){
-        if ($(this)[0].hostname.length>0 && $(this)[0].hostname != window.location.hostname) {
+        if ($(this)[0].hostname.length>0 && $(this)[0].hostname !== window.location.hostname) {
             window.open($(this)[0].href);
             return false;
         }

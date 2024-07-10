@@ -43,11 +43,15 @@ urlpatterns = [
     path('user/<int:nid>/assign/', views.assignrole, name='assign_role'),
     path('role/<int:nid>/assignfunction/', views.assignfunction, name='assign_function'),
     path('<int:nid>/permission/', views.checkpermission, name='check_permission'),
-    path('analysis/',analysis_views.choice_gupiao),
+    # path('analysis/',analysis_views.choice_gupiao),  # 用户输入
+    path('portfolio/input',analysis_views.choice_gupiao),  # 用户输入
     path('portfolio/label/min', analysis_views.weights_min_var_label),  # 权重表展示
     path('portfolio/label/max', analysis_views.weights_util_max_label),
     path('portfolio/label/equal', analysis_views.weights_equal_label),
     path('portfolio/cumulative_excess_returns', analysis_views.cumulative_excess_returns),  # 累积收益率绘图展示
     path('portfolio/monthly_excess_returns', analysis_views.monthly_excess_returns),  # 超额收益率绘图展示
-    path('portfolio/calculate_and_return_metrics_html', analysis_views.calculate_and_return_metrics_html)  # 收益概述表展示
+    path('portfolio/calculate_and_return_metrics_html', analysis_views.calculate_and_return_metrics_html),  # 收益概述表展示
+    path('portfolio/thermodynamic_chart/min', analysis_views.thermodynamic_chart_min),  # 热力图展示
+    path('portfolio/thermodynamic_chart/max', analysis_views.thermodynamic_chart_max),
+    path('portfolio/thermodynamic_chart/equal', analysis_views.thermodynamic_chart_equal)
 ]

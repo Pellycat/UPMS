@@ -1,13 +1,12 @@
 import os
-
-from django.shortcuts import render
-
-
+from io import BytesIO
+import base64
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from .models import Lasso_Predicted_Return,EN_Predicted_Return,Rd_Predicted_Return,Real_Return
 
 
@@ -345,16 +344,16 @@ def choice_gupiao(request):
             result = EN_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
             weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
-            return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
+            return redirect("/portfolio/calculate_and_return_metrics_html")
         elif model == "Ridge":
             result = Rd_Predicted_Return.objects.filter(Date__range=[start, end])
             result_df = pd.DataFrame(list(result.values()))
             weights_min_var_df, weights_util_max_df, weights_equal_df, monthly_excess_returns_df = data_process(result_df, capital, num, start, end)
-            return JsonResponse({'message': '数据已收到', 'start_date': start, 'end_date': end})
+            return redirect("/portfolio/calculate_and_return_metrics_html")
         else:
             return JsonResponse({'message': '请选择合适的模型'})
 
-    return render(request, 'inputadd.html')
+    return render(request, 'portfolio_input.html')
 
 
 def weights_min_var_label(request):
@@ -570,3 +569,95 @@ def calculate_and_return_metrics_html(request):
 
     # 将HTML表格返回给前端页面
     return render(request, 'portfolio_metrics_table.html', {'metrics_html': metrics_html, 'n1': start, 'n2': end})
+
+
+def thermodynamic_chart_min(request):
+    global weights_min_var_df, start, end
+    # print(weights_min_var_df)
+
+    # 使用seaborn创建热力图
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(weights_min_var_df, annot=True, fmt=".2f", cmap='coolwarm')
+    plt.title('Minimum Variance Portfolio Weights Heatmap')
+    plt.xlabel('Assets')
+    plt.ylabel('Weights')
+    plt.tight_layout()
+
+    # 确保目录存在
+    static_dir = os.path.join(os.path.dirname(__file__), 'static', 'plot')
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+
+    # 保存图像文件
+    image_path = os.path.join(static_dir, 'min_variance_heatmap.png')
+    plt.savefig(image_path)
+    plt.close()
+
+    # 获取相对路径用于模板显示
+    image_url = 'plot/min_variance_heatmap.png'
+
+    return render(request, 'thermodynamic_chart_min.html', {
+        'n1': start,
+        'n2': end,
+        'image_url': image_url
+    })
+
+def thermodynamic_chart_max(request):
+    global weights_util_max_df, start, end
+
+    # 使用seaborn创建热力图
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(weights_util_max_df, annot=True, fmt=".2f", cmap='coolwarm')
+    plt.title('Maximum Variance Portfolio Weights Heatmap')
+    plt.xlabel('Assets')
+    plt.ylabel('Weights')
+    plt.tight_layout()
+
+    # 确保目录存在
+    static_dir = os.path.join(os.path.dirname(__file__), 'static', 'plot')
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+
+    # 保存图像文件
+    image_path = os.path.join(static_dir, 'max_variance_heatmap.png')
+    plt.savefig(image_path)
+    plt.close()
+
+    # 获取相对路径用于模板显示
+    image_url = 'plot/max_variance_heatmap.png'
+
+    return render(request, 'thermodynamic_chart_max.html', {
+        'n1': start,
+        'n2': end,
+        'image_url': image_url
+    })
+
+def thermodynamic_chart_equal(request):
+    global weights_equal_df, start, end
+
+    # 使用seaborn创建热力图
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(weights_equal_df, annot=True, fmt=".2f", cmap='coolwarm')
+    plt.title('Equal Variance Portfolio Weights Heatmap')
+    plt.xlabel('Assets')
+    plt.ylabel('Weights')
+    plt.tight_layout()
+
+    # 确保目录存在
+    static_dir = os.path.join(os.path.dirname(__file__), 'static', 'plot')
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+
+    # 保存图像文件
+    image_path = os.path.join(static_dir, 'equal_variance_heatmap.png')
+    plt.savefig(image_path)
+    plt.close()
+
+    # 获取相对路径用于模板显示
+    image_url = 'plot/equal_variance_heatmap.png'
+
+    return render(request, 'thermodynamic_chart_equal.html', {
+        'n1': start,
+        'n2': end,
+        'image_url': image_url
+    })
