@@ -1,0 +1,556 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>策略展示</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="vipType" content="">
+<meta name="tick-access" content="0" />
+<link type='text/css'  href="https://cdn.joinquant.com/common/css/lib.min.css?v=1719998041744" rel='stylesheet'></link>
+<link type='text/css'  href="https://cdn.joinquant.com/common/css/common.min.css?v=1719998041744" rel='stylesheet'></link>
+<link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/static/common/css/jq-common.min.css?v=1719998041744">
+<link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/static/default/css/newUserTip.css?v=1719998041744">
+<link rel="stylesheet" href="https://cdn.joinquant.com/themes/jq/dist/static_v2/default/backtotop/detail/index/index.component.bundle.css?v=1719998041744">
+<link rel="icon" href="https://cdn.joinquant.com/common/img/favicon-16-16.png?v=2" type="image/x-icon">
+<link rel="stylesheet" type='text/css' href="https://cdn.joinquant.com/dist/static_v2/global/user/login/index/index.component.bundle.css?v=1719998041744" />
+<link rel="stylesheet" type='text/css' href="https://cdn.joinquant.com/user/css/unreadMsg.css?v=1719998041744" />
+<link type='text/css'  href="https://cdn.joinquant.com/themes/jq/static/default/css/iconfont.css" rel='stylesheet'/>
+<link href="https://cdn.joinquant.com/std/third/comboSelect/combo.select.css" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/std/third/loading/loading.css" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/third/jquery-ui/jquery-ui-jq.min.css?v=1719998041744" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/common/css/newBootstrapDialog.min.css?v=1719998041744" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/std/algorithm/css/algorithm.min.css?v=1719998041744" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/std/algorithm/css/backtest.min.css?v=1719998041744" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/std/algorithm/css/newTrade.min.css?v=1719998041744" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/themes/jq/static/algorithm/css/algorithm.min.css?v=1719998041744" rel="stylesheet" />
+<link href="https://cdn.joinquant.com/themes/jq/static/algorithm/css/getNewAlgorithmDialog.min.css?v=1719998041744" rel="stylesheet" />
+
+<style>
+	body.mobile{
+		overflow-x: hidden;
+	}
+
+	#portfolio-perf-label{
+		position:relative;
+	}
+	#portfolio-perf-label .payload{
+		top:10px;
+	}
+	.mobile #live-trading-link{
+		display: none;
+	}
+	.legend-item-radio{
+		margin-left: 10px;
+	}
+	.kk_main.in_wrap{
+		min-width: 970px;
+	}
+	.mobile .kk_main.in_wrap{
+		min-width: 0;
+	}
+	@media(max-width: 1370px){
+		.legend-item[data-key="Benchmark"].powered-by{
+			display: none;
+		}
+	}
+	@media(max-width: 1200px){
+		#portfolio-perf-label .payload{
+			width:230px;
+		}
+		.legend-item-radio{
+			margin-left: 0;
+		}
+		#portfolio-perf-label{
+			padding:5px;
+		}
+	}
+	.kk_body {
+		padding-bottom: 0;
+	}
+	footer {
+		display: none !important;
+	}
+</style>
+
+<style>
+    .kk_body{
+        padding-bottom:0px;
+    }
+</style>
+<style>
+    span.new{
+    background: rgba(0,0,0,0);
+}
+.side-bar .top .name.user-alias img{
+    width:16px;
+    height:16px;
+    float: none;
+    margin-right:0;
+}
+.kk_footer .wp20.last img{
+    position: relative;
+    top:-2px;
+}
+.kk_footer .wp20.last .item>a{
+    position: relative;
+    left:-5px;
+}
+</style>
+<style>
+    .container {
+        width: 50%; /* 控制表单宽度 */
+        margin: 0 auto; /* 居中表单 */
+        padding: 20px;
+        background-color: #f5f5f5; /* 背景色 */
+        border-radius: 8px; /* 圆角边框 */
+        box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 阴影效果 */
+    }
+
+    .item-title {
+        display: block; /* 使标题和输入框在不同行显示 */
+        margin-bottom: 5px; /* 间距调整 */
+        font-weight: bold; /* 字体加粗 */
+    }
+
+    .item-input{
+        width: 100%; /* 输入框宽度 */
+        padding: 8px;
+        border: 1px solid #ccc; /* 边框 */
+        border-radius: 4px; /* 圆角 */
+        box-sizing: border-box; /* 盒模型调整 */
+    }
+
+    .item-select {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    -webkit-appearance: menulist-button;
+    appearance: menulist-button;
+    }
+
+    .item-select:focus {
+        outline: none;  /* 移除焦点时的轮廓线 */
+    }
+
+    /* 确保所有选项都可见 */
+    .item-select option {
+        display: block;
+        background: white;
+        color: black;
+    }
+
+    .new-item {
+        margin-bottom: 20px; /* 项目间距 */
+    }
+
+    .modal-footer {
+        text-align: center; /* 按钮居中 */
+    }
+
+    .btn-default {
+        color: black; /* 黑色文字 */
+        background-color: white; /* 白色背景 */
+        border: 1px solid #ccc; /* 灰色边框 */
+    }
+
+    .btn-primary {
+        color: white !important; /* 白色文字，确保优先级 */
+        background-color: #007bff !important; /* 蓝色背景，确保优先级 */
+        border: 1px solid #007bff; /* 蓝色边框 */
+    }
+</style>
+
+<script type='text/javascript'>
+    var _vds = _vds || [];
+    window._vds = _vds;
+    (function(){
+                        _vds.push(['setAccountId', '949f6a566feb9b09']);
+                                    _vds.push(['trackBot', false]);
+     (function() {
+       // if (window.location.href.indexOf('www.joinquant.com') > -1) {
+         var vds = document.createElement('script');
+         vds.type='text/javascript';
+         vds.async = true;
+         vds.src = ('https:' === document.location.protocol ? 'https://' : 'http://') + 'assets.giocdn.com/vds.js';
+         var s = document.getElementsByTagName('script')[0];
+         s.parentNode.insertBefore(vds, s);
+       // }
+     })();
+    })();
+    var g_domain = 'https://www.joinquant.com';
+    var g_filedomain = 'https://file.joinquant.com';
+
+</script>
+</head>
+
+<body >
+<div class="kk_main in_wrap">
+    <header id="kk_nav" class="fixed-top kk_nav navbar narbar-static-top heigh_nav">
+        <div class="kk_nav_container js-jq-header" ></div>
+    </header>
+<!--/header-->
+<!-- <div class="kk_body  js-jq-body hidden top_50  "> -->
+    <div class="kk_body js-jq-body top_50  ">
+        <div class="backtest-area content content-area old-style padding_b0" >
+            <input type="hidden" id="isOwner" value="1">
+            <input type="hidden" id="backtest-decryptId" value="35439623">
+            <input type="hidden" id="backtestTpl" data-backtestId="01adc9583c546017b7f27925775532ba">
+            <input type="hidden" id="minLiveDate" name="minLiveDate"  value="2024-07-09">
+            <input type="hidden" id="accessControl" name="accessControl"  value="0">
+            <input type="hidden" id="local_algorithmId" value="5146375">
+            <input type="hidden" id="algorithmId" name="backtest[algorithmId]"  value="b285bbe7632a2740ba3752ff2fffb6d2">
+            <input type="hidden" id="liveTimeout" name="liveTimeout"  value="1">
+            <input type="hidden" id="source-backtest" name="source-backtest" value="cfcd208495d565ef66e7dff9f98764da" >
+            <!-- 判断当前模拟盘选的python版本 -->
+            <input type="hidden" id="tradePyVersion" value="2" >
+    <!-- TODO: 将form换为div，防止被提交 -->
+            <div name="AlgorithmModel">
+                <input type="hidden" id="backtestId" name="backtest[backtestId]"  value="94a941aa4011c86f9e1279595b9a7c73" backtestId_="a9f90cc1607dd6f980db270888920420">
+
+                <textarea  id="code" name="backtest[code]" class="hidden" _isLoad="0" _backtestId="33050854092b64f6338bbdb00d156d28"></textarea>
+                <div id="subnav" class="subnav">
+                    <a href="/algorithm/index/edit?algorithmId=eb04bd2914711c901a3386f700541365" class="algo-back" title="返回策略页">
+                        <i class="icon icon-chevron-left no-decoration"></i>
+                    </a>
+                    <div style="display:inline-block;margin-top: 13px" class="fa-title-box">
+                        <span id="title-box" >沪深300量化交易策略辅助系统</span>
+                    <div class="state-triangle-detail"></div>
+                    <div class="state-triangle-detail border"></div>
+                    </div>
+                </div>
+
+                <div id="main-pane" class="main-pane">
+                    <div id="backtest-settings-outer-container" class="clearfix">
+                        <div class="left-container pull-left" >
+                            <div class="inline-block setting">
+                                <span>日期：</span>
+                                <div id="backtest-settings-summary-payload" class="backtest-settings-summary-payload white-on-tour inline-block">
+                                    <span class="date backtest_start_date_display" id="startDate">{{ n1 }}</span>
+                                    <span> 到 </span>
+                                    <span class="date backtest_end_date_display" id="endDate">{{ n2 }}</span>，
+                                    <span class="capital backtest_capitalbase_display" id="baseCapital">￥100000</span>，
+                                    <span id="backtestCapital" _cash="100000" class="hidden"></span>
+                                    <span class="capital backtest_datafrequency_display" id="frequency" value="day">每月</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backtest-toolbar-container pull-right">
+                            <div id="deploy-algo-button-group" class="btn-group inline-block">
+                                <a _totalLiveCount="0" _remainCount="4" class="live-trade-btn btn disabled with-events" data-toggle="modal" data-target="" id="new-algorithm">模拟交易</a>
+                            </div>
+                            <div class="btn-group inline-block" >
+                                <a class="btn-attributionAnaly btn disabled" id="btn-attributionAnaly" backtestId="995c8fd92c899638df49152c0d788f6c" href="javascript:void(0)" target="_blank">归因分析</a>
+                            </div>
+                            <div class="btn-group inline-block">
+                                <a id="backtest-menu-toggle" href="#" data-toggle="dropdown" class="btn dropdown-toggle">导出<span class="caret" style="margin-left:5px"></span></a>
+                                <ul class="dropdown-menu pull-right" id="backtest-toolbar-dropdown">
+                                    <li>
+                                        <a id="export-csv-button" href="" data-toggle="modal" download="data.xls">收益概述</a>
+                                    </li>
+                                    <li>
+                                        <a id="export-transaction-button" href="#"  class="logdaochu" type="transaction"  backtestId="7e1f1a3275e03d18a3cfe1f7422a1fa3">交易详情</a>
+                                    </li>
+                                    <li>
+                                        <a id="export-position-button" href="#" class="logdaochu" type="position" backtestId="631ad911c426225c6d310fa8bb97a070">持仓&收益</a>
+                                    </li>
+                                    <li>
+                                        <a id="export-log-button" href="#"  class="logdaochu" type="log" backtestId="5cf2b4df4d73ce3fdc0b4eba42d895a7">日志</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="backtest-results-box" class="algorithm-area">
+                        <div id="ide-box" class="box ide mo-box" style="width: auto; ">
+                            <div id="splitter-outer-container">
+                                <div id="backtest-atomic-container" class="ui-widget ui-widget-content data-container clear" data-splitter-initialized="true">
+                                    <div id="result-area" class="splitter-pane data-container">
+                                        <ul id="result-tabs" class="nav nav-tabs vertical">
+                                            <li>
+                                                <a id="positions-tab" href="/portfolio/input"><span class="nav-tabs-span positions-tab-span"></span>参数输入</a>
+                                            </li>
+                                            <li>
+                                                <a href="/portfolio/calculate_and_return_metrics_html"><span class="nav-tabs-span tab-summaryinfo-span"></span>收益概述</a>
+                                            </li>
+                                            <li>
+                                                <a id="positions-tab" href="/portfolio/label/min"><span class="nav-tabs-span positions-tab-span"></span>最小方差投资组合持仓权重</a>
+                                            </li>
+                                            <li>
+                                                <a id="logs-tab" href="/portfolio/label/max" ><span class="nav-tabs-span logs-tab-span"></span>最大化效用投资组合持仓权重</a>
+                                            </li>
+                                            <li>
+                                                <a id="profile-tab" href="/portfolio/label/equal"><span class="nav-tabs-span profile-tab-span"></span>等权重投资组合持仓权重</a>
+                                            </li>
+                                            <li>
+                                                <a id="code-tab" href="/portfolio/cumulative_excess_returns"><span class="nav-tabs-span code-tab-span"></span>累积超额收益率图</a>
+                                            </li>
+                                            <li>
+                                                <a id="transactions-tab" href="/portfolio/monthly_excess_returns"><span class="nav-tabs-span transactions-tab-span"></span>组合月超额收益率图</a>
+                                            </li>
+                                            <li>
+                                                <a href="/portfolio/thermodynamic_chart/min"><span class="nav-tabs-span tab-algorithm-span"></span>最小方差投资组合权重热力图</a>
+                                            </li>
+                                            <li>
+                                                <a href="/portfolio/thermodynamic_chart/max"><span class="nav-tabs-span tab-benchmark-span"></span>最大化效用投资权重热力图</a>
+                                            </li>
+                                            <li>
+                                                <a href="/portfolio/thermodynamic_chart/equal"><span class="nav-tabs-span alpha-span"></span>等权重投资组合权重热力图</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-beta" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span beta-span"></span>贝塔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-sharpe" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span sharpe-span"></span>夏普比率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-sortino" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span sortino-span"></span>索提诺比率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-information" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span information-ratio-span"></span>信息比率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-algo_volatility" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span volatility-span"></span>波动率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-benchmark_volatility" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span benchmark-volatility-span"></span>基准波动率</a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab-max_drawdown" data-toggle="tab" class="enable-when-done risk"><span class="nav-tabs-span max-drawdown-span"></span>最大回撤</a>
+                                            </li>
+                                        </ul>
+                                        <div class="after"></div>
+                                    </div>
+                                    <div id="splitter-pane" class="splitter-pane">
+                                        <div class="container">
+                                            <form action="/portfolio/input" method="POST">
+                                                {% csrf_token %}
+                                                <div class="new-item">
+                                                    <label class="item-title">交易名称</label>
+                                                    <input type="text" class="item-input" name="name" placeholder="请输入交易名称">
+                                                </div>
+                                                <div class="new-item">
+                                                    <label class="item-title">选择策略</label>
+                                                    <select class="item-select" name="algorithmId">
+                                                        <option value="Lasso">Lasso</option>
+                                                        <option value="Ridge">Ridge</option>
+                                                        <option value="EN">EN</option>
+                                                    </select>
+                                                </div>
+                                                <div class="new-item">
+                                                    <label class="item-title">初始资金</label>
+                                                    <input type="number" class="item-input" name="capital" value="10000">
+                                                </div>
+                                                <div class="new-item">
+                                                    <label class="item-title">股票池数量</label>
+                                                    <input type="number" class="item-input" name="pool_num" value="5">
+                                                </div>
+                                                <div class="new-item">
+                                                    <label class="item-title">运行频率</label>
+                                                    <select class="item-select" name="frequency">
+                                                        <option value="month">每月</option>
+                                                    </select>
+                                                </div>
+                                                <div class="new-item">
+                                                    <label class="item-title">开始日期</label>
+                                                    <input type="text" class="item-input" name="startTime" placeholder="YYYY-MM-DD">
+                                                </div>
+                                                <div class="new-item">
+                                                    <label class="item-title">结束日期</label>
+                                                    <input type="text" class="item-input" name="endTime" placeholder="YYYY-MM-DD">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default">取消</button>
+                                                    <button type="submit" class="btn btn-primary">确定</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title">Modal title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>One fine body…</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- loading -->
+
+
+    <div id="leftsead" class="">
+      <ul></ul>
+      <input type="text" class="timeStamp" value="1719998041744" style="display:none">
+      <input type="text" class="js-cdn-path" value="https://cdn.joinquant.com" style="display:none">
+    </div>
+
+
+    <script>
+        var g_staticHost = 'https://cdn.joinquant.com';
+
+        var isInnerEnv = false;
+
+        var g_isMobile = false;
+
+        var g_isLogin = true;
+
+        var g_isWinApp= false;
+
+    </script>
+    <script>
+      window.tokenData = {
+        name: "token",
+        value: "99bf882c3d26ecbbae537244e9540e7692ecb3a2aa9ada5ef260aaeae83bee7d5f4c784338b31dc8"
+      }
+    </script>
+
+    <script src="https://cdn.joinquant.com/common/js/mustache.min.js"></script>
+    <script src="https://cdn.joinquant.com/common/js/lib.min.js?v=1719998041744"></script>
+    <script src="https://cdn.joinquant.com/themes/jq/static/common/js/setGroIO.js?v=1719998041744"></script>
+
+    <script src="https://cdn.joinquant.com/dist/static_v2/venders/common.js"></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/util.js?v=1719998041744"></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/component.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/common/common.header.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/dist/static_v2/global/user/login/index/index.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/themes/jq/dist/static_v2/global/include/include/include.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/themes/jq/static/dist/asset/general/baidu-tongji.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.joinquant.com/themes/jq/dist/static_v2/default/backtotop/detail/index/index.module.bundle.js?v=1719998041744" ></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    // 添加你的JavaScript脚本这里
+    // 使用JavaScript来处理用户输入的日期字符串
+    const startTimeInput = document.getElementById('startTime');
+    const endTimeInput = document.getElementById('endTime');
+    const form = document.querySelector('form');
+
+    #form.addEventListener('submit', async function(event) {
+    #event.preventDefault(); // 阻止默认表单提交行为
+
+    const formData = new FormData(form);
+    const response = await fetch('/portfolio/input', {
+        method: 'POST',
+        body: formData
+    });
+
+    const result = await response.json();
+    console.log('后端返回的数据：', result);
+});
+    startTimeInput.addEventListener('change', function() {
+        const startTime = startTimeInput.value;
+        console.log('用户输入的开始日期字符串是：', startTime);
+    });
+
+    endTimeInput.addEventListener('change', function() {
+        const endTime = endTimeInput.value;
+        console.log('用户输入的结束日期字符串是：', endTime);
+    });
+
+</script>
+    <script>
+        // 显示隐藏nav选项
+        $('.dropdown_menu').click(function(){
+            return false;
+        })
+        $('.dropdown_menu').hover(function(){
+            var href = $(this).attr('href');
+            $('.nav-dropdown-item').addClass('hidden');
+            $(href).removeClass('hidden');
+        },function(){});
+
+        $('ul.nav').find('li').find('a').hover(function(){
+            if ($(this).hasClass('dropdown_menu')) {
+                return;
+            }
+           $('.nav-dropdown-item').addClass('hidden');
+        })
+        $('#kk_nav').mouseleave(function(){
+            $('.nav-dropdown-item').addClass('hidden');
+        })
+    </script>
+
+    <script>
+    $('.dropdown-toggle').dropdown();
+    $("body").delegate("a","click",function(){
+        if ($(this)[0].hostname.length>0 && $(this)[0].hostname !== window.location.hostname) {
+            window.open($(this)[0].href);
+            return false;
+        }
+    });
+	</script>
+    <script charset="UTF-8" src="https://cdn.joinquant.com/common/js/mustache.min.js?v=1719998041744"></script>
+    <script charset="UTF-8" src="https://cdn.joinquant.com/default/js/Validform_v5.3.2_min.js?v=1719998041744"></script>
+    <script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/std/third/comboSelect/jquery.combo.select.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/third/jquery-ui/jquery-ui-jq.min.js?v=1719998041744"></script>
+	<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/third/ace/ace.min.js?v=1719998041744"></script>
+	<script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/themes/jq/static/algorithm/js/detail.min.js?v=1719998041744"></script>
+	<!-- 模拟交易位vip校验功能 -->
+	<script charset="UTF-8" src="https://cdn.joinquant.com/themes/jq/static/algorithm/js/newTradeStd.min.js?v=1719998041744"></script>
+    <script charset="UTF-8" type="text/javascript" src="https://cdn.joinquant.com/std/third/loading/loading.js"></script>
+	<script charset="UTF-8" src="https://cdn.joinquant.com/themes/jq/static/algorithm/js/newTrade.min.js?v=1719998041744"></script>
+
+	<div style="display:none">
+        <script src="https://s95.cnzz.com/z_stat.php?id=1256107754&web_id=1256107754" language="JavaScript"></script>
+            <!-- 返回顶部 -->
+        <script>
+             var img = new Image();
+             var referer = "";
+             var euid = "5fa4bc4384825f7ae1b4bc2e247765dd";
+             var urd = "2024_07_03";
+             var logHost = '';
+             var timestamp=new Date().getTime();
+             img.src = logHost+'/log/p.gif?euid='+euid+"&referer="+referer+'&urd='+urd+'&_t='+timestamp;
+        </script>
+        <script>
+          /*cnzz点击事件统计*/
+          $('.track_event_click').click(function(){
+              var cate = $(this).attr('_cate');
+              var name = $(this).attr('_name');
+               _czc.push(['_trackEvent', cate, '点击', name]);
+          });
+
+          $('.js-tag-hot').on('click', function() {
+            window.setCookie('isActiveHot', 1, 365 * 10 * 24 * 60);
+          });
+
+          if ($.cookie('isActiveHot') === '1') {
+            $('.js-tag-hot div').hide();
+          };
+        </script>
+        <!-- 网易七鱼客户系统 -->
+        <script>
+            (function (w, d, n, a, j) {
+                w[n] = w[n] || function () {
+                    (w[n].a = w[n].a || []).push(arguments);
+                };
+                j = d.createElement('script');
+                j.async = true;
+                j.src = 'https://qiyukf.com/script/d65beefd7552d92ee02344b3cc6173de.js';
+                d.body.appendChild(j);
+            })(window, document, 'ysf');
+        </script>
+    </div>
+</body>
+</html>
