@@ -372,6 +372,7 @@ def weights_min_var_label(request):
         'n1': start, 'n2': end
     })
 
+
 def weights_util_max_label(request):
     global weights_util_max_df, start, end
     # 检查全局变量是否为 DataFrame 实例
@@ -384,6 +385,7 @@ def weights_util_max_label(request):
         'n1': start, 'n2': end
     })
 
+
 def weights_equal_label(request):
     global weights_equal_df, start, end
     # 检查全局变量是否为 DataFrame 实例
@@ -395,6 +397,7 @@ def weights_equal_label(request):
         'weights_equal_html': weights_equal_html,
         'n1': start, 'n2': end
     })
+
 
 def cumulative_excess_returns(request):
     global monthly_excess_returns_df, start, end
@@ -510,6 +513,7 @@ def calculate_metrics(returns, benchmark, equal_excess_returns):
         'Alpha(全样本)': alpha,
     }
 
+
 def create_metrics_html(metrics_df):
     # 假设 metrics_df 是你的 DataFrame
     # 分割 DataFrame 为两部分
@@ -530,6 +534,7 @@ def create_metrics_html(metrics_df):
     </table>
     """
     return combined_html
+
 
 def calculate_and_return_metrics_html(request):
     # 假设这里获取了market数据，这部分需根据实际情况调整
@@ -606,6 +611,7 @@ def thermodynamic_chart_min(request):
         'image_url': image_url
     })
 
+
 def thermodynamic_chart_max(request):
     global weights_util_max_df, start, end
 
@@ -635,6 +641,7 @@ def thermodynamic_chart_max(request):
         'n2': end,
         'image_url': image_url
     })
+
 
 def thermodynamic_chart_equal(request):
     global weights_equal_df, start, end
@@ -666,15 +673,17 @@ def thermodynamic_chart_equal(request):
         'image_url': image_url
     })
 
+
 def stocks_choose(request):
     global top_stocks_df, start, end
+    top_stocks_choose = top_stocks_df.copy()
     # 检查全局变量是否为 DataFrame 实例
-    if not isinstance(top_stocks_df, pd.DataFrame):
-        top_stocks_df = pd.DataFrame()
-    top_stocks_df.dropna(inplace=True)
-    top_stocks_df = top_stocks_df.to_html(classes='table table-striped custom-table')
+    if not isinstance(top_stocks_choose, pd.DataFrame):
+        top_stocks_choose = pd.DataFrame()
+    top_stocks_choose.dropna(inplace=True)
+    top_stocks_choose = top_stocks_choose.to_html(classes='table table-striped custom-table')
 
     return render(request, 'top_stocks_df.html', {
-        'top_stocks_df_html': top_stocks_df,
+        'top_stocks_df_html': top_stocks_choose,
         'n1': start, 'n2': end
     })

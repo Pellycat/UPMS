@@ -4,7 +4,7 @@ from .models import UserInfo,RoleInfo,FunctionInfo
 
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, redirect, get_object_or_404
-
+from analysis import templates as analysis_templates
 global_name="管理员"
 def login(request):
     if request.method == 'POST':
@@ -18,7 +18,7 @@ def login(request):
                 if user.identity == '管理员' and identity == 'user':
                     return redirect('/main/')  # 管理员页面
                 elif user.identity == '普通用户' and identity == 'member':
-                    return redirect(f'/{user_id}/permission/')
+                    return redirect('/portfolio/input')
                 else:
                     messages.error(request, "身份不匹配。")
             else:
